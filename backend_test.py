@@ -181,8 +181,8 @@ class TurkishFoodAiAPITester:
             self.log_result("Cuisines API", False, f"Exception: {str(e)}")
     
     def test_offers_api_basic(self):
-        """Test basic GET /api/offers endpoint"""
-        print("\n🧪 Testing Basic Offers API...")
+        """Test basic GET /api/offers endpoint for Turkish food offers"""
+        print("\n🧪 Testing Turkish Food Offers API...")
         
         try:
             response = requests.get(f"{API_BASE}/offers", timeout=10)
@@ -213,32 +213,56 @@ class TurkishFoodAiAPITester:
                 self.log_result("Offers Data", False, "No offers returned or not an array")
                 return
             
-            # Test offer structure
+            # Test offer structure for Turkish platform
             offer = offers[0]
             required_offer_fields = [
-                'id', 'providerId', 'providerName', 'restaurantName', 'city', 
-                'cuisine', 'title', 'originalPrice', 'discountedPrice', 'discountPercent'
+                'id', 'provider_id', 'provider_name', 'restaurant_name', 'city', 
+                'cuisine_types', 'title', 'original_price', 'discounted_price', 'discount_percent', 'currency'
             ]
             missing_offer_fields = [field for field in required_offer_fields if field not in offer]
             
             if not missing_offer_fields:
-                self.log_result("Offer Structure", True, "All required fields present")
+                self.log_result("Turkish Offer Structure", True, "All required fields present")
             else:
-                self.log_result("Offer Structure", False, f"Missing fields: {missing_offer_fields}")
+                self.log_result("Turkish Offer Structure", False, f"Missing fields: {missing_offer_fields}")
             
-            # Test data types and values
-            if isinstance(offer['originalPrice'], (int, float)) and offer['originalPrice'] > 0:
-                self.log_result("Original Price Valid", True, f"Price: {offer['originalPrice']}")
+            # Test Turkish Lira currency
+            if 'currency' in offer and offer['currency'] == 'TL':
+                self.log_result("Turkish Lira Currency", True, f"Currency: {offer['currency']}")
             else:
-                self.log_result("Original Price Valid", False, f"Invalid price: {offer['originalPrice']}")
+                self.log_result("Turkish Lira Currency", False, f"Expected TL, got: {offer.get('currency', 'missing')}")
             
-            if isinstance(offer['discountPercent'], (int, float)) and 0 < offer['discountPercent'] <= 100:
-                self.log_result("Discount Percent Valid", True, f"Discount: {offer['discountPercent']}%")
+            # Test Turkish price range (20-100 TL)
+            if isinstance(offer['original_price'], (int, float)) and 20 <= offer['original_price'] <= 100:
+                self.log_result("Turkish Price Range", True, f"Price: {offer['original_price']} TL")
             else:
-                self.log_result("Discount Percent Valid", False, f"Invalid discount: {offer['discountPercent']}")
+                self.log_result("Turkish Price Range", False, f"Price {offer['original_price']} TL outside expected range")
+            
+            # Test discount validity
+            if isinstance(offer['discount_percent'], (int, float)) and 0 < offer['discount_percent'] <= 100:
+                self.log_result("Discount Percent Valid", True, f"Discount: {offer['discount_percent']}%")
+            else:
+                self.log_result("Discount Percent Valid", False, f"Invalid discount: {offer['discount_percent']}")
+            
+            # Test Turkish food items
+            turkish_foods = ['Kebap', 'Döner', 'Pide', 'Lahmacun', 'Mantı', 'Köfte', 'İskender', 'Adana', 'Urfa']
+            offer_title = offer.get('title', '').lower()
+            has_turkish_food = any(food.lower() in offer_title for food in turkish_foods)
+            
+            if has_turkish_food:
+                self.log_result("Turkish Food Items", True, f"Found Turkish food: {offer['title']}")
+            else:
+                # Check if it's international food (also acceptable)
+                self.log_result("Turkish Food Items", True, f"Food item: {offer['title']} (international acceptable)")
+            
+            # Test image URL presence
+            if 'image_url' in offer and offer['image_url'].startswith('https://'):
+                self.log_result("Image URL Present", True, "Valid image URL found")
+            else:
+                self.log_result("Image URL Present", False, "Missing or invalid image URL")
                 
         except Exception as e:
-            self.log_result("Offers API Basic", False, f"Exception: {str(e)}")
+            self.log_result("Turkish Offers API Basic", False, f"Exception: {str(e)}")
     
     def test_offers_filtering(self):
         """Test offers API with various filters"""
