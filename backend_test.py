@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Comprehensive Backend API Tests for FoodAi Application
-Tests all API endpoints with various scenarios and validates responses
+Comprehensive Backend API Tests for FoodAi Türk Application
+Tests all Turkish food platform API endpoints with Supabase integration
 """
 
 import requests
