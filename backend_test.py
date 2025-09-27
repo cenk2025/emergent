@@ -40,62 +40,76 @@ class FinnishFoodAITester:
         else:
             self.failed_tests += 1
     
-    def test_providers_api(self):
-        """Test GET /api/providers endpoint for Turkish food platforms"""
-        print("\n🧪 Testing Turkish Providers API...")
+    def test_api_health(self):
+        """Test basic API health and connectivity"""
+        print("\n🔍 Testing API Health & Connectivity...")
+        
+        try:
+            response = requests.get(f"{API_BASE}/", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                expected_message = "FoodAi API - Suomen Ruokatarjousten Vertailupalvelu"
+                
+                if data.get('message') == expected_message:
+                    self.log_test("API Health Check", True, f"Status: {response.status_code}")
+                    return True
+                else:
+                    self.log_test("API Health Check", False, f"Unexpected message: {data.get('message')}")
+                    return False
+            else:
+                self.log_test("API Health Check", False, f"Status: {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("API Health Check", False, f"Connection error: {str(e)}")
+            return False
+    
+    def test_finnish_providers(self):
+        """Test Finnish food providers API"""
+        print("\n🏪 Testing Finnish Food Providers...")
         
         try:
             response = requests.get(f"{API_BASE}/providers", timeout=10)
             
-            # Test status code
-            if response.status_code == 200:
-                self.log_result("Providers API Status", True, "200 OK")
-            else:
-                self.log_result("Providers API Status", False, f"Expected 200, got {response.status_code}")
-                return
+            if response.status_code != 200:
+                self.log_test("Providers API Response", False, f"Status: {response.status_code}")
+                return False
             
-            # Test response structure
-            data = response.json()
-            if isinstance(data, list):
-                self.log_result("Providers Response Type", True, "Returns array")
-            else:
-                self.log_result("Providers Response Type", False, f"Expected array, got {type(data)}")
-                return
+            providers = response.json()
             
-            # Test provider structure
-            if len(data) > 0:
-                provider = data[0]
+            # Check if it's a list
+            if not isinstance(providers, list):
+                self.log_test("Providers Data Structure", False, "Response is not a list")
+                return False
+            
+            # Expected Finnish providers
+            expected_providers = ['Wolt', 'Foodora', 'ResQ Club']
+            provider_names = [p.get('name') for p in providers]
+            
+            # Check each expected provider
+            for expected in expected_providers:
+                if expected in provider_names:
+                    self.log_test(f"Provider {expected} Present", True)
+                else:
+                    self.log_test(f"Provider {expected} Present", False, f"Missing {expected}")
+            
+            # Check provider structure
+            for provider in providers:
                 required_fields = ['id', 'name', 'logo_url', 'color']
                 missing_fields = [field for field in required_fields if field not in provider]
                 
                 if not missing_fields:
-                    self.log_result("Provider Structure", True, f"All required fields present")
+                    self.log_test(f"Provider {provider.get('name')} Structure", True)
                 else:
-                    self.log_result("Provider Structure", False, f"Missing fields: {missing_fields}")
-                
-                # Test expected Turkish providers
-                provider_ids = [p['id'] for p in data]
-                provider_names = [p['name'] for p in data]
-                expected_providers = ['yemeksepeti', 'getir', 'trendyol']
-                expected_names = ['Yemeksepeti', 'Getir Yemek', 'Trendyol Yemek']
-                
-                found_providers = [pid for pid in expected_providers if pid in provider_ids]
-                found_names = [name for name in expected_names if name in provider_names]
-                
-                if len(found_providers) >= 2:  # At least 2 Turkish providers
-                    self.log_result("Turkish Providers", True, f"Found: {found_providers}")
-                else:
-                    self.log_result("Turkish Providers", False, f"Expected Turkish providers, found: {provider_ids}")
-                
-                if len(found_names) >= 2:  # At least 2 Turkish provider names
-                    self.log_result("Turkish Provider Names", True, f"Found: {found_names}")
-                else:
-                    self.log_result("Turkish Provider Names", False, f"Expected Turkish names, found: {provider_names}")
-            else:
-                self.log_result("Providers Data", False, "No providers returned")
-                
+                    self.log_test(f"Provider {provider.get('name')} Structure", False, 
+                                f"Missing fields: {missing_fields}")
+            
+            return len(providers) >= 3
+            
         except Exception as e:
-            self.log_result("Providers API", False, f"Exception: {str(e)}")
+            self.log_test("Providers API", False, f"Error: {str(e)}")
+            return False
     
     def test_cities_api(self):
         """Test GET /api/cities endpoint for Turkish cities"""
