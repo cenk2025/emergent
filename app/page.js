@@ -67,9 +67,9 @@ export default function FoodAi() {
           sortBy
         });
         
-        if (selectedCity) params.append('city', selectedCity);
-        if (selectedCuisine) params.append('cuisine', selectedCuisine);
-        if (selectedProvider) params.append('provider', selectedProvider);
+        if (selectedCity && selectedCity !== 'all') params.append('city', selectedCity);
+        if (selectedCuisine && selectedCuisine !== 'all') params.append('cuisine', selectedCuisine);
+        if (selectedProvider && selectedProvider !== 'all') params.append('provider', selectedProvider);
         if (minDiscount[0] > 10) params.append('minDiscount', minDiscount[0].toString());
         if (maxPrice[0] < 50) params.append('maxPrice', maxPrice[0].toString());
         
