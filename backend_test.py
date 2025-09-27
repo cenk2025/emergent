@@ -470,9 +470,54 @@ class FinnishFoodAITester:
     def run_all_tests(self):
         """Run all backend tests"""
         print("🚀 Starting Comprehensive Finnish FoodAI Backend Testing...")
+        print(f"🌐 Testing API at: {API_BASE}")
+        print("=" * 80)
         
-        try:
-            response = requests.get(f"{API_BASE}/offers", timeout=10)
+        # Run all test suites
+        test_suites = [
+            self.test_api_health,
+            self.test_supabase_integration,
+            self.test_finnish_providers,
+            self.test_finnish_cities,
+            self.test_finnish_cuisines,
+            self.test_finnish_offers,
+            self.test_offers_filtering,
+            self.test_clickout_tracking,
+            self.test_statistics
+        ]
+        
+        for test_suite in test_suites:
+            try:
+                test_suite()
+            except Exception as e:
+                print(f"❌ Test suite {test_suite.__name__} failed with error: {str(e)}")
+                self.failed_tests += 1
+        
+        # Print final results
+        print("\n" + "=" * 80)
+        print("📊 FINAL TEST RESULTS")
+        print("=" * 80)
+        
+        total_tests = self.passed_tests + self.failed_tests
+        success_rate = (self.passed_tests / total_tests * 100) if total_tests > 0 else 0
+        
+        print(f"✅ Passed: {self.passed_tests}")
+        print(f"❌ Failed: {self.failed_tests}")
+        print(f"📈 Success Rate: {success_rate:.1f}%")
+        
+        if self.failed_tests == 0:
+            print("\n🎉 ALL TESTS PASSED! Finnish FoodAI Backend is fully functional!")
+        else:
+            print(f"\n⚠️  {self.failed_tests} tests failed. Review the issues above.")
+        
+        return self.failed_tests == 0
+
+if __name__ == "__main__":
+    tester = FinnishFoodAITester()
+    success = tester.run_all_tests()
+    
+    # Exit with appropriate code
+    sys.exit(0 if success else 1)
             
             if response.status_code == 200:
                 self.log_result("Offers API Status", True, "200 OK")
