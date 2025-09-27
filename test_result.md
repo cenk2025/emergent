@@ -253,5 +253,7 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Implemented complete FoodAi MVP with mock data providers, comprehensive filtering, sorting, pagination, and clickout tracking. All backend API endpoints need testing to verify functionality. Frontend is implemented but backend testing should be completed first."
+  - agent: "main"
+    message: "Updated core functionality: 1) Fixed Euro symbol position (now on right side), 2) Increased max price filter from 50€ to 200€, 3) Fixed broken images with high-quality food photos, 4) Created provider infrastructure for Wolt/Foodora/ResQ Club APIs, 5) Implemented DeepSeek chatbot with Finnish/English support. Added new API endpoints: /api/chat and /api/chat/stream for AI assistance. Need to test new chat functionality and updated price/image features."
   - agent: "testing"
     message: "✅ BACKEND TESTING COMPLETE - All 7 backend tasks tested and working perfectly! Comprehensive testing performed on all API endpoints: Providers, Cities, Cuisines, Offers (with filtering, sorting, pagination), Clickout tracking, and Statistics. 36/36 tests passed (100% success rate). All endpoints return proper data structures, handle filters correctly, and perform as expected. Backend is fully functional and ready for production."
