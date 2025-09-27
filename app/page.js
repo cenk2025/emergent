@@ -496,7 +496,7 @@ export default function FoodAi() {
                           className="w-full" 
                           onClick={() => handleClickout(offer)}
                         >
-                          {texts.orderNow} €{(offer.original_price - offer.discounted_price).toFixed(2)}
+                          {texts.orderNow} {(offer.original_price - offer.discounted_price).toFixed(2)} €
                         </Button>
                       </CardContent>
                     </Card>
