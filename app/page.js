@@ -384,7 +384,7 @@ export default function FoodAi() {
 
                 {/* Price Filter */}
                 <div className="space-y-3">
-                  <label className="text-sm font-medium">{texts.maxPrice}: €{maxPrice[0]}</label>
+                  <label className="text-sm font-medium">{texts.maxPrice}: {maxPrice[0]} €</label>
                   <Slider
                     value={maxPrice}
                     onValueChange={setMaxPrice}
