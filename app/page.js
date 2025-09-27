@@ -347,10 +347,10 @@ export default function FoodAi() {
                         <div className="flex items-center justify-between mb-4">
                           <div>
                             <span className="text-lg font-bold text-green-600">
-                              ₺{offer.discounted_price}
+                              €{offer.discounted_price}
                             </span>
                             <span className="text-sm text-muted-foreground line-through ml-2">
-                              ₺{offer.original_price}
+                              €{offer.original_price}
                             </span>
                           </div>
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -363,7 +363,7 @@ export default function FoodAi() {
                           className="w-full" 
                           onClick={() => handleClickout(offer)}
                         >
-                          Sipariş Ver - ₺{(offer.original_price - offer.discounted_price).toFixed(2)} Tasarruf
+                          Tilaa nyt - Säästä €{(offer.original_price - offer.discounted_price).toFixed(2)}
                         </Button>
                       </CardContent>
                     </Card>
