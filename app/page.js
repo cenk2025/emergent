@@ -178,9 +178,9 @@ export default function FoodAi() {
             <Card className="sticky top-4">
               <CardContent className="p-6 space-y-6">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-semibold text-lg">Suodattimet</h3>
+                  <h3 className="font-semibold text-lg">Filtreler</h3>
                   <Button variant="ghost" size="sm" onClick={resetFilters}>
-                    Tyhjennä
+                    Temizle
                   </Button>
                 </div>
                 
@@ -188,13 +188,13 @@ export default function FoodAi() {
                 
                 {/* City Filter */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Kaupunki</label>
+                  <label className="text-sm font-medium">Şehir</label>
                   <Select value={selectedCity} onValueChange={setSelectedCity}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Valitse kaupunki" />
+                      <SelectValue placeholder="Şehir seçin" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">Kaikki kaupungit</SelectItem>
+                      <SelectItem value="all">Tüm şehirler</SelectItem>
                       {cities.map(city => (
                         <SelectItem key={city} value={city}>{city}</SelectItem>
                       ))}
@@ -204,13 +204,13 @@ export default function FoodAi() {
 
                 {/* Cuisine Filter */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Keittiö</label>
+                  <label className="text-sm font-medium">Mutfak</label>
                   <Select value={selectedCuisine} onValueChange={setSelectedCuisine}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Valitse keittiötyyppi" />
+                      <SelectValue placeholder="Mutfak türü seçin" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">Kaikki keittiöt</SelectItem>
+                      <SelectItem value="all">Tüm mutfaklar</SelectItem>
                       {cuisines.map(cuisine => (
                         <SelectItem key={cuisine} value={cuisine}>{cuisine}</SelectItem>
                       ))}
@@ -220,13 +220,13 @@ export default function FoodAi() {
 
                 {/* Provider Filter */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Palvelu</label>
+                  <label className="text-sm font-medium">Platform</label>
                   <Select value={selectedProvider} onValueChange={setSelectedProvider}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Valitse palvelu" />
+                      <SelectValue placeholder="Platform seçin" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="all">Kaikki palvelut</SelectItem>
+                      <SelectItem value="all">Tüm platformlar</SelectItem>
                       {providers.map(provider => (
                         <SelectItem key={provider.id} value={provider.id}>
                           {provider.name}
@@ -238,11 +238,11 @@ export default function FoodAi() {
 
                 {/* Discount Filter */}
                 <div className="space-y-3">
-                  <label className="text-sm font-medium">Min. alennus: {minDiscount[0]}%</label>
+                  <label className="text-sm font-medium">Min. indirim: %{minDiscount[0]}</label>
                   <Slider
                     value={minDiscount}
                     onValueChange={setMinDiscount}
-                    max={50}
+                    max={60}
                     min={0}
                     step={5}
                     className="w-full"
@@ -251,28 +251,28 @@ export default function FoodAi() {
 
                 {/* Price Filter */}
                 <div className="space-y-3">
-                  <label className="text-sm font-medium">Max. hinta: €{maxPrice[0]}</label>
+                  <label className="text-sm font-medium">Max. fiyat: ₺{maxPrice[0]}</label>
                   <Slider
                     value={maxPrice}
                     onValueChange={setMaxPrice}
-                    max={100}
-                    min={5}
-                    step={5}
+                    max={200}
+                    min={10}
+                    step={10}
                     className="w-full"
                   />
                 </div>
 
                 {/* Sort Options */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium">Järjestys</label>
+                  <label className="text-sm font-medium">Sıralama</label>
                   <Select value={sortBy} onValueChange={setSortBy}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="discount">Suurin alennus</SelectItem>
-                      <SelectItem value="price">Halvin hinta</SelectItem>
-                      <SelectItem value="rating">Paras arvosana</SelectItem>
+                      <SelectItem value="discount">En yüksek indirim</SelectItem>
+                      <SelectItem value="price">En düşük fiyat</SelectItem>
+                      <SelectItem value="rating">En yüksek puan</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
