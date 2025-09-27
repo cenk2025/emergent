@@ -34,6 +34,7 @@ export default function FoodAi() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [language, setLanguage] = useState('fi'); // Language state
+  const [isChatOpen, setIsChatOpen] = useState(false); // Chat state
   
   const { theme, setTheme } = useTheme();
   const { user, isAdmin, signOut } = useAuth();
