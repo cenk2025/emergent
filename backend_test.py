@@ -465,51 +465,7 @@ class FinnishFoodAITester:
             self.log_test("Cities API", False, f"Error: {str(e)}")
             return False
     
-    def run_all_tests(self):
-        """Test GET /api/cuisines endpoint for Turkish cuisine types"""
-        print("\n🧪 Testing Turkish Cuisines API...")
-        
-        try:
-            response = requests.get(f"{API_BASE}/cuisines", timeout=10)
-            
-            if response.status_code == 200:
-                self.log_result("Cuisines API Status", True, "200 OK")
-            else:
-                self.log_result("Cuisines API Status", False, f"Expected 200, got {response.status_code}")
-                return
-            
-            data = response.json()
-            if isinstance(data, list):
-                self.log_result("Cuisines Response Type", True, "Returns array")
-            else:
-                self.log_result("Cuisines Response Type", False, f"Expected array, got {type(data)}")
-                return
-            
-            # Test expected Turkish cuisines
-            turkish_cuisines = ['Türk Mutfağı', 'Kebap', 'Pizza', 'Fast Food']
-            international_cuisines = ['Sushi', 'Japonya', 'Tatlı', 'Kahvaltı']
-            
-            found_turkish = [c for c in turkish_cuisines if c in data]
-            found_international = [c for c in international_cuisines if c in data]
-            
-            if len(found_turkish) >= 2:  # At least 2 Turkish cuisine types
-                self.log_result("Turkish Cuisines", True, f"Found: {found_turkish}")
-            else:
-                self.log_result("Turkish Cuisines", False, f"Expected Turkish cuisines, found: {found_turkish}")
-            
-            if len(found_international) >= 1:  # At least 1 international cuisine
-                self.log_result("International Cuisines", True, f"Found: {found_international}")
-            else:
-                self.log_result("International Cuisines", True, f"No international cuisines (acceptable)")
-            
-            # Check total variety
-            if len(data) >= 4:
-                self.log_result("Cuisine Variety", True, f"Total {len(data)} cuisine types")
-            else:
-                self.log_result("Cuisine Variety", False, f"Only {len(data)} cuisine types")
-                
-        except Exception as e:
-            self.log_result("Cuisines API", False, f"Exception: {str(e)}")
+    # Old Turkish test methods removed - using Finnish tests instead
     
     def test_offers_api_basic(self):
         """Test basic GET /api/offers endpoint for Turkish food offers"""
