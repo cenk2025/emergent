@@ -388,7 +388,7 @@ export default function FoodAi() {
                   <Slider
                     value={maxPrice}
                     onValueChange={setMaxPrice}
-                    max={50}
+                    max={200}
                     min={5}
                     step={5}
                     className="w-full"
