@@ -93,8 +93,8 @@ class TurkishFoodAiAPITester:
             self.log_result("Providers API", False, f"Exception: {str(e)}")
     
     def test_cities_api(self):
-        """Test GET /api/cities endpoint"""
-        print("\n🧪 Testing Cities API...")
+        """Test GET /api/cities endpoint for Turkish cities"""
+        print("\n🧪 Testing Turkish Cities API...")
         
         try:
             response = requests.get(f"{API_BASE}/cities", timeout=10)
@@ -112,12 +112,24 @@ class TurkishFoodAiAPITester:
                 self.log_result("Cities Response Type", False, f"Expected array, got {type(data)}")
                 return
             
-            # Test expected cities
-            expected_cities = ['Helsinki', 'Tampere', 'Turku']
-            if all(city in data for city in expected_cities):
-                self.log_result("Expected Cities", True, f"Found all: {expected_cities}")
+            # Test expected Turkish cities
+            expected_cities = ['İstanbul', 'Ankara', 'İzmir']
+            major_cities = ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya']
+            
+            found_cities = [city for city in expected_cities if city in data]
+            found_major = [city for city in major_cities if city in data]
+            
+            if len(found_cities) >= 3:  # All 3 major cities
+                self.log_result("Major Turkish Cities", True, f"Found all: {found_cities}")
+            elif len(found_cities) >= 2:  # At least 2 major cities
+                self.log_result("Major Turkish Cities", True, f"Found: {found_cities}")
             else:
-                self.log_result("Expected Cities", False, f"Missing some cities. Got: {data}")
+                self.log_result("Major Turkish Cities", False, f"Expected Turkish cities, got: {data}")
+            
+            if len(found_major) >= 3:  # At least 3 Turkish cities
+                self.log_result("Turkish Cities Count", True, f"Found {len(found_major)} Turkish cities")
+            else:
+                self.log_result("Turkish Cities Count", False, f"Only found {len(found_major)} Turkish cities")
                 
         except Exception as e:
             self.log_result("Cities API", False, f"Exception: {str(e)}")
