@@ -111,47 +111,45 @@ class FinnishFoodAITester:
             self.log_test("Providers API", False, f"Error: {str(e)}")
             return False
     
-    def test_cities_api(self):
-        """Test GET /api/cities endpoint for Turkish cities"""
-        print("\n🧪 Testing Turkish Cities API...")
+    def test_finnish_cities(self):
+        """Test Finnish cities API"""
+        print("\n🏙️ Testing Finnish Cities...")
         
         try:
             response = requests.get(f"{API_BASE}/cities", timeout=10)
             
-            if response.status_code == 200:
-                self.log_result("Cities API Status", True, "200 OK")
+            if response.status_code != 200:
+                self.log_test("Cities API Response", False, f"Status: {response.status_code}")
+                return False
+            
+            cities = response.json()
+            
+            # Check if it's a list
+            if not isinstance(cities, list):
+                self.log_test("Cities Data Structure", False, "Response is not a list")
+                return False
+            
+            # Expected Finnish cities
+            expected_cities = ['Helsinki', 'Tampere', 'Oulu', 'Turku', 'Espoo']
+            
+            # Check each expected city
+            for expected in expected_cities:
+                if expected in cities:
+                    self.log_test(f"City {expected} Present", True)
+                else:
+                    self.log_test(f"City {expected} Present", False, f"Missing {expected}")
+            
+            # Check minimum number of cities
+            if len(cities) >= 5:
+                self.log_test("Sufficient Finnish Cities", True, f"Found {len(cities)} cities")
             else:
-                self.log_result("Cities API Status", False, f"Expected 200, got {response.status_code}")
-                return
+                self.log_test("Sufficient Finnish Cities", False, f"Only {len(cities)} cities found")
             
-            data = response.json()
-            if isinstance(data, list):
-                self.log_result("Cities Response Type", True, "Returns array")
-            else:
-                self.log_result("Cities Response Type", False, f"Expected array, got {type(data)}")
-                return
+            return len(cities) >= 5
             
-            # Test expected Turkish cities
-            expected_cities = ['İstanbul', 'Ankara', 'İzmir']
-            major_cities = ['İstanbul', 'Ankara', 'İzmir', 'Bursa', 'Antalya']
-            
-            found_cities = [city for city in expected_cities if city in data]
-            found_major = [city for city in major_cities if city in data]
-            
-            if len(found_cities) >= 3:  # All 3 major cities
-                self.log_result("Major Turkish Cities", True, f"Found all: {found_cities}")
-            elif len(found_cities) >= 2:  # At least 2 major cities
-                self.log_result("Major Turkish Cities", True, f"Found: {found_cities}")
-            else:
-                self.log_result("Major Turkish Cities", False, f"Expected Turkish cities, got: {data}")
-            
-            if len(found_major) >= 3:  # At least 3 Turkish cities
-                self.log_result("Turkish Cities Count", True, f"Found {len(found_major)} Turkish cities")
-            else:
-                self.log_result("Turkish Cities Count", False, f"Only found {len(found_major)} Turkish cities")
-                
         except Exception as e:
-            self.log_result("Cities API", False, f"Exception: {str(e)}")
+            self.log_test("Cities API", False, f"Error: {str(e)}")
+            return False
     
     def test_cuisines_api(self):
         """Test GET /api/cuisines endpoint for Turkish cuisine types"""
