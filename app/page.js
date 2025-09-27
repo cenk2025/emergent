@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
-import { MapPin, Clock, Star, Percent, Euro, Truck, ShoppingBag, Search, Filter, Loader2, User, Settings, LogOut } from 'lucide-react';
+import { MapPin, Clock, Star, Percent, Euro, Truck, ShoppingBag, Search, Filter, Loader2, User, Settings, LogOut, MessageCircle } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
