@@ -468,8 +468,8 @@ class FinnishFoodAITester:
     # Old Turkish test methods removed - using Finnish tests instead
     
     def run_all_tests(self):
-        """Test basic GET /api/offers endpoint for Turkish food offers"""
-        print("\n🧪 Testing Turkish Food Offers API...")
+        """Run all backend tests"""
+        print("🚀 Starting Comprehensive Finnish FoodAI Backend Testing...")
         
         try:
             response = requests.get(f"{API_BASE}/offers", timeout=10)
