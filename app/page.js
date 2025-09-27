@@ -194,7 +194,7 @@ export default function FoodAi() {
                       <SelectValue placeholder="Valitse kaupunki" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Kaikki kaupungit</SelectItem>
+                      <SelectItem value="all">Kaikki kaupungit</SelectItem>
                       {cities.map(city => (
                         <SelectItem key={city} value={city}>{city}</SelectItem>
                       ))}
@@ -210,7 +210,7 @@ export default function FoodAi() {
                       <SelectValue placeholder="Valitse keittiötyyppi" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Kaikki keittiöt</SelectItem>
+                      <SelectItem value="all">Kaikki keittiöt</SelectItem>
                       {cuisines.map(cuisine => (
                         <SelectItem key={cuisine} value={cuisine}>{cuisine}</SelectItem>
                       ))}
@@ -226,7 +226,7 @@ export default function FoodAi() {
                       <SelectValue placeholder="Valitse palvelu" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Kaikki palvelut</SelectItem>
+                      <SelectItem value="all">Kaikki palvelut</SelectItem>
                       {providers.map(provider => (
                         <SelectItem key={provider.id} value={provider.id}>
                           {provider.name}
