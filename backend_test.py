@@ -1,24 +1,20 @@
 #!/usr/bin/env python3
 """
-Comprehensive Backend API Tests for FoodAi Türk Application
-Tests all Turkish food platform API endpoints with Supabase integration
+Comprehensive Backend Testing for FoodAI Finnish + Supabase Platform
+Tests all API endpoints for Finnish food providers, cities, offers, and functionality
 """
 
 import requests
 import json
-import time
-from datetime import datetime
 import os
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
+from datetime import datetime
+import sys
 
 # Get base URL from environment
 BASE_URL = os.getenv('NEXT_PUBLIC_BASE_URL', 'https://savorydeals.preview.emergentagent.com')
 API_BASE = f"{BASE_URL}/api"
 
-class TurkishFoodAiAPITester:
+class FinnishFoodAITester:
     def __init__(self):
         self.test_results = {
             'passed': 0,
