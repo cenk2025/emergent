@@ -410,10 +410,10 @@ export default function FoodAi() {
                 {offers.length === 0 && !loading && (
                   <div className="text-center py-12">
                     <div className="text-muted-foreground text-lg mb-4">
-                      Ei tarjouksia löytynyt valituilla suodattimilla
+                      Seçilen filtrelere uygun teklif bulunamadı
                     </div>
                     <Button variant="outline" onClick={resetFilters}>
-                      Tyhjennä suodattimet
+                      Filtreleri temizle
                     </Button>
                   </div>
                 )}
