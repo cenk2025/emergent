@@ -608,39 +608,47 @@ class FinnishFoodAITester:
             self.log_result("Combined Filters", False, f"Exception: {str(e)}")
     
     def run_all_tests(self):
-        """Run all backend API tests"""
-        print(f"🚀 Starting FoodAi Backend API Tests")
-        print(f"📍 Testing against: {API_BASE}")
-        print("=" * 60)
+        """Run all backend tests"""
+        print("🚀 Starting Comprehensive Finnish FoodAI Backend Testing...")
+        print(f"🌐 Testing API at: {API_BASE}")
+        print("=" * 80)
         
-        # Run all test methods
-        self.test_providers_api()
-        self.test_cities_api()
-        self.test_cuisines_api()
-        self.test_offers_api_basic()
-        self.test_offers_filtering()
-        self.test_offers_sorting()
-        self.test_offers_pagination()
-        self.test_clickout_tracking()
-        self.test_statistics_api()
-        self.test_combined_filters()
+        # Run all test suites
+        test_suites = [
+            self.test_api_health,
+            self.test_finnish_providers,
+            self.test_finnish_cities
+        ]
         
-        # Print summary
-        print("\n" + "=" * 60)
-        print("📊 TEST SUMMARY")
-        print("=" * 60)
-        print(f"✅ Passed: {self.test_results['passed']}")
-        print(f"❌ Failed: {self.test_results['failed']}")
-        print(f"📈 Success Rate: {(self.test_results['passed'] / (self.test_results['passed'] + self.test_results['failed']) * 100):.1f}%")
+        for test_suite in test_suites:
+            try:
+                test_suite()
+            except Exception as e:
+                print(f"❌ Test suite {test_suite.__name__} failed with error: {str(e)}")
+                self.failed_tests += 1
         
-        if self.test_results['errors']:
-            print(f"\n🔍 FAILED TESTS:")
-            for error in self.test_results['errors']:
-                print(f"   • {error}")
+        # Print final results
+        print("\n" + "=" * 80)
+        print("📊 FINAL TEST RESULTS")
+        print("=" * 80)
         
-        print("\n🎯 Backend API testing completed!")
-        return self.test_results
+        total_tests = self.passed_tests + self.failed_tests
+        success_rate = (self.passed_tests / total_tests * 100) if total_tests > 0 else 0
+        
+        print(f"✅ Passed: {self.passed_tests}")
+        print(f"❌ Failed: {self.failed_tests}")
+        print(f"📈 Success Rate: {success_rate:.1f}%")
+        
+        if self.failed_tests == 0:
+            print("\n🎉 ALL TESTS PASSED! Finnish FoodAI Backend is fully functional!")
+        else:
+            print(f"\n⚠️  {self.failed_tests} tests failed. Review the issues above.")
+        
+        return self.failed_tests == 0
 
 if __name__ == "__main__":
-    tester = FoodAiAPITester()
-    results = tester.run_all_tests()
+    tester = FinnishFoodAITester()
+    success = tester.run_all_tests()
+    
+    # Exit with appropriate code
+    sys.exit(0 if success else 1)
