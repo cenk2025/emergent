@@ -341,16 +341,95 @@ export async function GET(request) {
     const { pathname, searchParams } = new URL(request.url);
     const path = pathname.split('/api/')[1] || '';
 
-    // Test Supabase connection
-    const connectionStatus = await testConnection();
-    if (!connectionStatus.connected) {
-      console.warn('Supabase connection failed, using mock data');
-    }
+    // Ensure Supabase tables exist (attempt to seed if not)
+    await ensureSupabaseTables();
 
-    // Generate Finnish offers
+    // Generate Finnish offers for demo
     const finnishOffers = generateFinnishOffers();
 
     switch (path) {
+      case 'admin/overview':
+        const overviewData = generateMockAdminData(finnishOffers);
+        const topOffers = finnishOffers
+          .sort((a, b) => (b.clickCount || 0) - (a.clickCount || 0))
+          .slice(0, 10);
+        
+        const cityStats = FINNISH_CITIES.slice(0, 6).map(city => {
+          const cityOffers = finnishOffers.filter(o => o.city === city);
+          return {
+            name: city,
+            offerCount: cityOffers.length,
+            clickCount: cityOffers.reduce((sum, o) => sum + (o.clickCount || 0), 0),
+            revenue: cityOffers.reduce((sum, o) => sum + (o.revenue || 0), 0).toFixed(2)
+          };
+        });
+
+        return NextResponse.json({
+          data: overviewData,
+          topOffers,
+          cityStats
+        });
+
+      case 'admin/providers':
+        const providersData = FINNISH_PROVIDERS.map(provider => {
+          const providerOffers = finnishOffers.filter(o => o.provider_id === provider.id);
+          const clickCount = providerOffers.reduce((sum, o) => sum + (o.clickCount || 0), 0);
+          const revenue = providerOffers.reduce((sum, o) => sum + (o.revenue || 0), 0);
+          const conversions = Math.floor(clickCount * 0.08);
+          
+          return {
+            ...provider,
+            logoUrl: provider.logo_url,
+            commissionRate: provider.commission_rate,
+            isActive: true,
+            offerCount: providerOffers.length,
+            clickCount,
+            conversions,
+            earned: (revenue * provider.commission_rate / 100).toFixed(2)
+          };
+        });
+
+        return NextResponse.json({ data: providersData });
+
+      case 'admin/clickouts':
+        const mockClickouts = finnishOffers.slice(0, 20).map((offer, index) => ({
+          id: uuidv4(),
+          offerId: offer.id,
+          offerTitle: offer.title,
+          providerId: offer.provider_id,
+          providerName: offer.provider_name,
+          timestamp: new Date(Date.now() - index * 1000 * 60 * 30).toISOString(),
+          isConversion: Math.random() > 0.9,
+          revenue: Math.random() > 0.9 ? parseFloat((Math.random() * 50).toFixed(2)) : 0
+        }));
+
+        return NextResponse.json({ data: mockClickouts });
+
+      case 'admin/commissions':
+        const mockCommissions = Array.from({ length: 15 }, (_, index) => {
+          const offer = finnishOffers[Math.floor(Math.random() * finnishOffers.length)];
+          const provider = FINNISH_PROVIDERS.find(p => p.id === offer.provider_id);
+          const grossAmount = parseFloat((Math.random() * 100 + 20).toFixed(2));
+          const commissionAmount = parseFloat((grossAmount * (provider?.commission_rate || 8) / 100).toFixed(2));
+          
+          return {
+            id: uuidv4(),
+            offerId: offer.id,
+            offerTitle: offer.title,
+            providerId: offer.provider_id,
+            providerName: offer.provider_name,
+            externalConversionId: `conv_${Math.random().toString(36).substr(2, 9)}`,
+            grossAmount: grossAmount.toFixed(2),
+            commissionAmount: commissionAmount.toFixed(2),
+            currency: 'EUR',
+            status: ['pending', 'approved', 'canceled'][Math.floor(Math.random() * 3)],
+            occurredAt: new Date(Date.now() - index * 1000 * 60 * 60 * Math.random() * 24).toISOString(),
+            reportedAt: new Date(Date.now() - index * 1000 * 60 * 60 * Math.random() * 12).toISOString()
+          };
+        });
+
+        return NextResponse.json({ data: mockCommissions });
+
       case 'offers':
         const city = searchParams.get('city') || '';
         const cuisine = searchParams.get('cuisine') || '';
