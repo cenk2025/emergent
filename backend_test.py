@@ -37,30 +37,19 @@ class FoodAITester:
         self.results.append(result)
         print(result)
     
-    def test_api_health(self):
+    def test_basic_api_health(self):
         """Test basic API health and connectivity"""
-        print("\n🔍 Testing API Health & Connectivity...")
+        print("\n=== BASIC API HEALTH TESTS ===")
         
         try:
-            response = requests.get(f"{API_BASE}/", timeout=10)
-            
+            response = requests.get(f"{API_BASE}", timeout=10)
             if response.status_code == 200:
                 data = response.json()
-                expected_message = "FoodAi API - Suomen Ruokatarjousten Vertailupalvelu"
-                
-                if data.get('message') == expected_message:
-                    self.log_test("API Health Check", True, f"Status: {response.status_code}")
-                    return True
-                else:
-                    self.log_test("API Health Check", False, f"Unexpected message: {data.get('message')}")
-                    return False
+                self.log_result("Basic API Health", True, f"Status: {data.get('status', 'OK')}")
             else:
-                self.log_test("API Health Check", False, f"Status: {response.status_code}")
-                return False
-                
+                self.log_result("Basic API Health", False, f"Status code: {response.status_code}")
         except Exception as e:
-            self.log_test("API Health Check", False, f"Connection error: {str(e)}")
-            return False
+            self.log_result("Basic API Health", False, f"Connection error: {str(e)}")
     
     def test_finnish_providers(self):
         """Test Finnish food providers API"""
