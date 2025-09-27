@@ -320,7 +320,13 @@ metadata:
   run_ui: false
 
 test_plan:
-  current_focus: []
+  current_focus:
+    - "DeepSeek Chat API Integration"
+    - "DeepSeek Streaming Chat API"
+    - "Provider Infrastructure - Wolt/Foodora/ResQ Club"
+    - "Chat Interface Component"
+    - "Price Filter Enhancement"
+    - "Image Quality and Display"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
