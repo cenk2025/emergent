@@ -6,18 +6,18 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'FoodAi.fi - En İyi Yemek Fırsatları Türkiye',
-  description: 'Yemeksepeti, Getir ve Trendyol Yemek\'teki indirimli teklifleri karşılaştır. Zamandan ve paradan tasarruf et.',
-  keywords: 'yemek siparişi, indirim, yemeksepeti, getir yemek, trendyol yemek, yemek fırsatları, tasarruf, istanbul, ankara',
+  title: 'FoodAi.fi - Löydä parhaat ruokatarjoukset Suomessa',
+  description: 'Vertaile ruokatarjouksia Woltista, Foodorasta ja ResQ Clubista. Säästä aikaa ja rahaa ruokaostoksissa.',
+  keywords: 'ruokatarjoukset, alennus, wolt, foodora, resq club, ruoka, tilaus, säästö, helsinki, suomi',
   openGraph: {
-    title: 'FoodAi.fi - Yemek Tekliflerini Karşılaştırma Platformu',
-    description: 'En iyi yemek fırsatlarını keşfet ve sipariş verirken tasarruf et',
+    title: 'FoodAi.fi - Ruokatarjousten vertailupalvelu',
+    description: 'Löydä parhaat ruokatarjoukset ja säästä rahaa tilauksissasi',
     type: 'website',
-    locale: 'tr_TR',
+    locale: 'fi_FI',
   },
   alternates: {
     languages: {
-      'tr': '/tr',
+      'fi': '/fi',
       'en': '/en',
     },
   },
