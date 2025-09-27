@@ -211,40 +211,93 @@ export default function FoodAi() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Navigation Bar */}
+      <nav className="bg-white dark:bg-gray-900 border-b shadow-sm">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2 text-2xl font-bold text-foreground">
+              <div className="p-2 bg-orange-500 rounded-lg text-white">
+                <Euro className="w-6 h-6" />
+              </div>
+              FoodAi.fi
+            </Link>
+
+            <div className="flex items-center gap-4">
+              {/* Language Toggle */}
+              <div className="flex bg-gray-100 dark:bg-gray-800 rounded-md p-1">
+                <button
+                  onClick={() => setLanguage('fi')}
+                  className={`px-3 py-1 text-sm rounded ${language === 'fi' ? 'bg-white dark:bg-gray-700 shadow-sm' : ''}`}
+                >
+                  FI
+                </button>
+                <button
+                  onClick={() => setLanguage('en')}
+                  className={`px-3 py-1 text-sm rounded ${language === 'en' ? 'bg-white dark:bg-gray-700 shadow-sm' : ''}`}
+                >
+                  EN
+                </button>
+              </div>
+
+              {/* User Menu */}
+              {user ? (
+                <div className="flex items-center gap-3">
+                  <span className="text-sm text-muted-foreground">{user.email}</span>
+                  {isAdmin && (
+                    <Link href="/admin">
+                      <Button variant="outline" size="sm">
+                        <Settings className="w-4 h-4 mr-1" />
+                        {texts.admin}
+                      </Button>
+                    </Link>
+                  )}
+                  <Button variant="ghost" size="sm" onClick={signOut}>
+                    <LogOut className="w-4 h-4 mr-1" />
+                    {texts.signOut}
+                  </Button>
+                </div>
+              ) : (
+                <Link href="/login">
+                  <Button variant="default">
+                    <User className="w-4 h-4 mr-1" />
+                    {texts.signIn}
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-orange-500/10 via-red-500/5 to-pink-500/10 border-b">
         <div className="container mx-auto px-4 py-12">
           <div className="text-center space-y-6">
-            <div className="flex items-center justify-center gap-2 text-3xl font-bold text-foreground">
-              <div className="p-2 bg-orange-500 rounded-lg text-white">
-                <Euro className="w-8 h-8" />
-              </div>
-              FoodAi.fi
-            </div>
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-              Löydä parhaat ruokatarjoukset
+              {texts.title}
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Vertaile alennuksia Woltista, Foodorasta ja ResQ Clubista. Säästä aikaa ja rahaa.
+              {texts.subtitle}
             </p>
             
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mt-8">
               <div className="text-center">
                 <div className="text-2xl font-bold text-orange-600">{stats.totalOffers || 0}</div>
-                <div className="text-sm text-muted-foreground">Tarjouksia</div>
+                <div className="text-sm text-muted-foreground">{texts.offers}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-green-600">{stats.averageDiscount || 0}%</div>
-                <div className="text-sm text-muted-foreground">Keskialennus</div>
+                <div className="text-sm text-muted-foreground">{texts.avgDiscount}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-600">{stats.activeProviders || 0}</div>
-                <div className="text-sm text-muted-foreground">Palvelua</div>
+                <div className="text-sm text-muted-foreground">{texts.providers}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-purple-600">€{stats.totalSavings || 0}</div>
-                <div className="text-sm text-muted-foreground">Säästöjä</div>
+                <div className="text-sm text-muted-foreground">{texts.savings}</div>
               </div>
             </div>
           </div>
