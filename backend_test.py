@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Comprehensive Backend Testing for FoodAI Finnish + Supabase Platform
-Tests all API endpoints for Finnish food providers, cities, offers, and functionality
+Comprehensive Backend Testing for FoodAI with DeepSeek Chat Integration
+Tests all API endpoints including new DeepSeek chat functionality, provider infrastructure, and existing features
 """
 
 import requests
 import json
 import os
+import time
 from datetime import datetime
 import sys
 
@@ -14,7 +15,7 @@ import sys
 BASE_URL = os.getenv('NEXT_PUBLIC_BASE_URL', 'https://mealdeals.preview.emergentagent.com')
 API_BASE = f"{BASE_URL}/api"
 
-class FinnishFoodAITester:
+class FoodAITester:
     def __init__(self):
         self.passed_tests = 0
         self.failed_tests = 0
