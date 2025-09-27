@@ -557,6 +557,27 @@ export default function FoodAi() {
           </div>
         </div>
       </div>
+      
+      {/* Floating Chat Button */}
+      {!isChatOpen && (
+        <Button
+          onClick={() => setIsChatOpen(true)}
+          className="fixed bottom-6 right-6 z-40 h-14 w-14 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 
+                     hover:from-purple-700 hover:to-blue-700 shadow-2xl border-2 border-white transition-all duration-300
+                     hover:scale-110 animate-pulse"
+          size="lg"
+        >
+          <MessageCircle className="h-6 w-6 text-white" />
+        </Button>
+      )}
+      
+      {/* Chat Interface */}
+      <ChatInterface
+        isOpen={isChatOpen}
+        onToggle={() => setIsChatOpen(!isChatOpen)}
+        language={language}
+        compact={false}
+      />
     </div>
   );
 }
