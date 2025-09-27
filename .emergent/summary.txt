@@ -1,0 +1,48 @@
+<analysis>
+The trajectory outlines the iterative development of FoodAi, a metasearch for discounted food offers. Initially, the AI engineer established a basic Next.js application with mock data, focusing on core search functionality. A significant pivot occurred when the user requested a Turkish localization and a shift from MongoDB/Firebase to a complete Supabase backend, including authentication. After implementing this, the user corrected the AI, emphasizing the original Finnish market and language, leading to another full localization effort. The current state reflects a functional Finnish MVP with Supabase DB and Auth, but critically, it still relies on mock data. The AI is now researching real provider APIs, which is the immediate next challenge, alongside fixing image issues, adjusting pricing, and currency display. The development process involved numerous file modifications across API routes, UI components, and authentication layers.
+</analysis>
+
+<product_requirements>
+The goal is to build FoodAi, a Trivago-like metasearch for discounted food offers in Finland (Finnish default, English optional). It aggregates deals from providers (Wolt, Foodora, ResQ Club), normalizes, deduplicates, ranks, and presents them with click-outs. Key features include a secure admin panel for commission/reconciliation, a modern fast-food UI, a DeepSeek-powered deal chatbot, Supabase DB (with RLS), Supabase Auth (with Google sign-in planned), i18n, and themes. Monetization is via CPC/CPA click-outs. The application must fetch real-time discounted food offers from providers, display images correctly, allow a maximum price of 200€, and show the Euro symbol (€) to the right of the amount. User access should include an admin dashboard accessible to  with comprehensive commission tracking and application data.
+</product_requirements>
+
+<key_technical_concepts>
+- Next.js (App Router, React Server Components)
+- TypeScript, React, Tailwind CSS, shadcn/ui
+- Supabase (PostgreSQL DB, Auth, RLS)
+- Zod (validation), Zustand (view state, mentioned in requirements but not explicitly implemented yet)
+- DeepSeek (for chatbot, planned)
+- i18n (Finnish default, English optional)
+</key_technical_concepts>
+
+<code_architecture>
+
+-   : Centralized API route handler for all backend logic, including offers, cities, cuisines, providers, stats, clickouts, commissions, and admin data. Initially used MongoDB, then fully migrated to Supabase queries. This file processes all data fetching and manipulation requests.
+-   : The main public facing UI component. It displays the food offers, statistics, and incorporates filtering functionalities. It has undergone extensive modifications for language (Finnish/Turkish/Finnish), currency, filter options, and data display structure.
+-   : The root layout component of the Next.js application. It manages global elements, theme, i18n, and now wraps the application with  for authentication context.
+-   : Initializes and exports the Supabase client for database interactions. It configures the Supabase URL and Anon key from environment variables.
+-   : Contains the SQL DDL statements for creating all necessary tables and a materialized view in Supabase (providers, restaurants, offers, clickouts, commissions, profiles, offer_index). This is intended for manual execution by the user.
+-   : Initializes and exports the Supabase Auth client, providing helper functions for authentication flows within the application.
+-   : Handles the redirect callback from Supabase after an authentication attempt (e.g., successful login). It processes the Supabase session data.
+-   : A Next.js middleware responsible for protecting routes, specifically redirecting unauthenticated users from the  path to the login page.
+-   : A React Context provider to manage and share authentication state (user session, loading state) across client components.
+-   : The dedicated login page for users, utilizing Supabase Auth for email/password and potentially Google sign-in.
+-   : The admin dashboard page. Currently a protected placeholder, it will eventually display comprehensive commission tracking and application data.
+</code_architecture>
+
+<pending_tasks>
+- Integrate real-time discounted food offers from Wolt, Foodora, and ResQ Club APIs.
+- Fix broken demo product images.
+- Increase the maximum price filter amount to 200€.
+- Adjust the Euro currency symbol position to the right of the price.
+- Implement the DeepSeek-powered deal chatbot.
+</pending_tasks>
+
+<current_work>
+Immediately prior to this summary, the AI engineer successfully finalized the core application for the Finnish market, including Supabase database integration and Supabase authentication. The admin dashboard is now protected and accessible via  after manual Supabase schema creation by the user. The frontend displays mock offers, categories, and statistics in Finnish, with an English language toggle functioning. The AI has received user confirmation that the Supabase schema is installed and admin login works. However, the user explicitly stated that the application is meaningless without real data from Wolt, Foodora, and ResQ Club, and pointed out issues with broken images, a low max price filter (50€), and incorrect Euro symbol placement (left side). The AI is currently researching the APIs of Wolt and Foodora to address the most critical missing feature: real offer data integration.
+</current_work>
+
+<optional_next_step>
+Initiate integration for the Wolt API to fetch real discounted food offer data.
+</optional_next_step>
+

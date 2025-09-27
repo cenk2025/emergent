@@ -11,7 +11,7 @@ from datetime import datetime
 import sys
 
 # Get base URL from environment
-BASE_URL = os.getenv('NEXT_PUBLIC_BASE_URL', 'https://savorydeals.preview.emergentagent.com')
+BASE_URL = os.getenv('NEXT_PUBLIC_BASE_URL', 'https://mealdeals.preview.emergentagent.com')
 API_BASE = f"{BASE_URL}/api"
 
 class FinnishFoodAITester:
