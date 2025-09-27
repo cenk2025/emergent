@@ -378,7 +378,7 @@ export default function FoodAi() {
                       onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                       disabled={currentPage === 1}
                     >
-                      Önceki
+                      Edellinen
                     </Button>
                     
                     <div className="flex items-center gap-2">
@@ -402,7 +402,7 @@ export default function FoodAi() {
                       onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                       disabled={currentPage === totalPages}
                     >
-                      Sonraki
+                      Seuraava
                     </Button>
                   </div>
                 )}
