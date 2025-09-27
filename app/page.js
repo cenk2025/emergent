@@ -151,7 +151,7 @@ export default function FoodAi() {
         if (selectedCuisine && selectedCuisine !== 'all') params.append('cuisine', selectedCuisine);
         if (selectedProvider && selectedProvider !== 'all') params.append('provider', selectedProvider);
         if (minDiscount[0] > 10) params.append('minDiscount', minDiscount[0].toString());
-        if (maxPrice[0] < 50) params.append('maxPrice', maxPrice[0].toString());
+        if (maxPrice[0] < 200) params.append('maxPrice', maxPrice[0].toString());
         
         const response = await fetch(`/api/offers?${params}`);
         const data = await response.json();
