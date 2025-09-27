@@ -267,13 +267,14 @@ function generateFinnishOffers() {
         endsAt.setHours(endsAt.getHours() + Math.floor(Math.random() * 48) + 2);
         
         // Food image URLs
+        // High-quality food images from Unsplash
         const foodImageIds = [
-          '1565299624946-b28f40a0ca4b', 
-          '1555992336-03a23a47b61e', 
-          '1498837167922-ddd27525d352', 
-          '1546833017-cc146d0aa952', 
-          '1565958011-293a49ba1c2e', 
-          '1574071318-ff4dc0252813'
+          '1546069901-ba9599a7e63c', // Colorful Buddha Bowl
+          '1715493926880-a15b1fee7b30', // Pancakes with Blueberries  
+          '1555939594-58d7cb561ad1', // Grilled Meat Platter
+          '1533777324565-a040eb52facd', // Pasta Spread
+          '1604908176997-125f25cc6f3d', // Chicken Tomato Salad
+          '1565299624946-b28f40a0ca4b'  // Fallback food image
         ];
         const imageId = foodImageIds[Math.floor(Math.random() * foodImageIds.length)];
         
