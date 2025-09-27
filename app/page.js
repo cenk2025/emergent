@@ -296,7 +296,7 @@ export default function FoodAi() {
                 <div className="text-sm text-muted-foreground">{texts.providers}</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600">€{stats.totalSavings || 0}</div>
+                <div className="text-2xl font-bold text-purple-600">{stats.totalSavings || 0} €</div>
                 <div className="text-sm text-muted-foreground">{texts.savings}</div>
               </div>
             </div>
