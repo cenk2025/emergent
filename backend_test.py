@@ -16,20 +16,29 @@ API_BASE = f"{BASE_URL}/api"
 
 class FinnishFoodAITester:
     def __init__(self):
-        self.test_results = {
-            'passed': 0,
-            'failed': 0,
-            'errors': []
-        }
+        self.passed_tests = 0
+        self.failed_tests = 0
+        self.test_results = []
         
-    def log_result(self, test_name, success, message=""):
-        if success:
-            self.test_results['passed'] += 1
-            print(f"✅ {test_name}: PASSED {message}")
+    def log_test(self, test_name, passed, details=""):
+        """Log test result"""
+        status = "✅ PASS" if passed else "❌ FAIL"
+        result = f"{status} - {test_name}"
+        if details:
+            result += f" | {details}"
+        
+        print(result)
+        self.test_results.append({
+            'test': test_name,
+            'passed': passed,
+            'details': details,
+            'timestamp': datetime.now().isoformat()
+        })
+        
+        if passed:
+            self.passed_tests += 1
         else:
-            self.test_results['failed'] += 1
-            self.test_results['errors'].append(f"{test_name}: {message}")
-            print(f"❌ {test_name}: FAILED {message}")
+            self.failed_tests += 1
     
     def test_providers_api(self):
         """Test GET /api/providers endpoint for Turkish food platforms"""
