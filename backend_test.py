@@ -465,7 +465,7 @@ class FinnishFoodAITester:
             self.log_test("Cities API", False, f"Error: {str(e)}")
             return False
     
-    def test_cuisines_api(self):
+    def run_all_tests(self):
         """Test GET /api/cuisines endpoint for Turkish cuisine types"""
         print("\n🧪 Testing Turkish Cuisines API...")
         
