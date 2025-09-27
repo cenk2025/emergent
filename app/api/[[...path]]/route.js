@@ -1,124 +1,158 @@
-import { supabase, testConnection, initializeFoodAiData, TURKISH_CITIES, TURKISH_FOOD_CATEGORIES } from '../../../lib/supabase.js';
+import { supabase, testConnection, initializeFoodAiData } from '../../../lib/supabase.js';
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 
-// Türk mutfağı için mock restoranlar
-const MOCK_RESTAURANTS = [
+// Finnish cities - all major cities in Finland
+const FINNISH_CITIES = [
+  'Helsinki', 'Espoo', 'Tampere', 'Vantaa', 'Oulu', 'Turku', 'Jyväskylä', 
+  'Lahti', 'Kuopio', 'Pori', 'Kouvola', 'Joensuu', 'Lappeenranta', 'Hämeenlinna',
+  'Vaasa', 'Seinäjoki', 'Rovaniemi', 'Mikkeli', 'Kotka', 'Salo', 'Porvoo'
+];
+
+// Finnish cuisine types
+const FINNISH_CUISINES = [
+  'Suomalainen', 'Pizza', 'Sushi', 'Kiinalainen', 'Intialainen', 'Thai', 'Italiana',
+  'Hampurilainen', 'Kebab', 'Meksikkolainen', 'Aasialainen', 'Vegan', 'Kasvis',
+  'Kala', 'Liha', 'Salaatti', 'Keitto', 'Grill', 'Fast Food', 'Jälkiruoka'
+];
+
+// Mock Finnish restaurants
+const FINNISH_RESTAURANTS = [
   { 
     id: 'rest_1', 
-    name: 'Sultanahmet Köftecisi', 
-    city: 'İstanbul', 
-    district: 'Fatih',
-    cuisine_types: ['Türk Mutfağı', 'Kebap'], 
-    rating: 4.7, 
-    latitude: 41.0082, 
-    longitude: 28.9784 
+    name: 'Ravintola Savoy', 
+    city: 'Helsinki', 
+    district: 'Keskusta',
+    cuisine_types: ['Suomalainen', 'Fine Dining'], 
+    rating: 4.8, 
+    latitude: 60.1699, 
+    longitude: 24.9384 
   },
   { 
     id: 'rest_2', 
-    name: 'Pandora Patisserie', 
-    city: 'İstanbul', 
-    district: 'Beşiktaş',
-    cuisine_types: ['Tatlı', 'Kahvaltı'], 
-    rating: 4.5, 
-    latitude: 41.0431, 
-    longitude: 29.0097 
+    name: 'Pizzeria da Mario', 
+    city: 'Helsinki', 
+    district: 'Kallio',
+    cuisine_types: ['Pizza', 'Italiana'], 
+    rating: 4.3, 
+    latitude: 60.1841, 
+    longitude: 24.9511 
   },
   { 
     id: 'rest_3', 
-    name: 'Adana Ocakbaşı', 
-    city: 'Ankara', 
-    district: 'Çankaya',
-    cuisine_types: ['Türk Mutfağı', 'Kebap'], 
+    name: 'Sushi Zen', 
+    city: 'Tampere', 
+    district: 'Keskusta',
+    cuisine_types: ['Sushi', 'Japanilainen'], 
     rating: 4.6, 
-    latitude: 39.9334, 
-    longitude: 32.8597 
+    latitude: 61.4981, 
+    longitude: 23.7608 
   },
   { 
     id: 'rest_4', 
-    name: 'Dominos Pizza', 
-    city: 'İzmir', 
-    district: 'Konak',
-    cuisine_types: ['Pizza', 'Fast Food'], 
-    rating: 4.2, 
-    latitude: 38.4192, 
-    longitude: 27.1287 
+    name: 'Golden Dragon', 
+    city: 'Turku', 
+    district: 'Keskusta',
+    cuisine_types: ['Kiinalainen', 'Aasialainen'], 
+    rating: 4.4, 
+    latitude: 60.4518, 
+    longitude: 22.2666 
   },
   { 
     id: 'rest_5', 
-    name: 'Sushi Time', 
-    city: 'İstanbul', 
-    district: 'Kadıköy',
-    cuisine_types: ['Sushi', 'Japonya'], 
-    rating: 4.8, 
-    latitude: 40.9892, 
-    longitude: 29.0208 
+    name: 'Burger Palace', 
+    city: 'Oulu', 
+    district: 'Keskusta',
+    cuisine_types: ['Hampurilainen', 'Fast Food'], 
+    rating: 4.2, 
+    latitude: 65.0121, 
+    longitude: 25.4651 
   },
   { 
     id: 'rest_6', 
-    name: 'Çiya Sofrası', 
-    city: 'İstanbul', 
-    district: 'Kadıköy',
-    cuisine_types: ['Türk Mutfağı', 'Geleneksel'], 
-    rating: 4.9, 
-    latitude: 40.9897, 
-    longitude: 29.0275 
+    name: 'Kebab King', 
+    city: 'Jyväskylä', 
+    district: 'Keskusta',
+    cuisine_types: ['Kebab', 'Turkkilainen'], 
+    rating: 4.1, 
+    latitude: 62.2426, 
+    longitude: 25.7473 
+  },
+  { 
+    id: 'rest_7', 
+    name: 'Thai Garden', 
+    city: 'Lahti', 
+    district: 'Keskusta',
+    cuisine_types: ['Thai', 'Aasialainen'], 
+    rating: 4.5, 
+    latitude: 60.9827, 
+    longitude: 25.6612 
+  },
+  { 
+    id: 'rest_8', 
+    name: 'Ravintola Aino', 
+    city: 'Kuopio', 
+    district: 'Keskusta',
+    cuisine_types: ['Suomalainen', 'Eurooppalainen'], 
+    rating: 4.7, 
+    latitude: 62.8924, 
+    longitude: 27.6780 
   }
 ];
 
-// Türk yemekleri için mock ürünler
-const TURKISH_FOOD_ITEMS = [
-  'Adana Kebap', 'Urfa Kebap', 'İskender Kebab', 'Döner Kebap', 'Şiş Kebap',
-  'Lahmacun', 'Pide', 'Mantı', 'Köfte', 'İnegöl Köfte',
-  'Margherita Pizza', 'Pepperoni Pizza', 'Karışık Pizza',
-  'Somon Sushi', 'California Roll', 'Teriyaki Tavuk',
-  'Cheeseburger', 'Big Mac', 'Tavuk Burger',
-  'Pad Thai', 'Green Curry', 'Tom Yum Çorbası',
-  'Tavuk Tikka Masala', 'Hint Pilavı', 'Naan Ekmek',
-  'Baklava', 'Künefe', 'Sütlaç', 'Kazandibi',
-  'Türk Kahvesi', 'Çay', 'Ayran', 'Şalgam'
-];
-
-// Mock sağlayıcılar
-const MOCK_PROVIDERS = [
+// Finnish food providers
+const FINNISH_PROVIDERS = [
   { 
-    id: 'yemeksepeti', 
-    name: 'Yemeksepeti', 
+    id: 'wolt', 
+    name: 'Wolt', 
     logo_url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=100&h=100&fit=crop', 
-    color: '#FF6B35' 
+    color: '#00C2E8' 
   },
   { 
-    id: 'getir', 
-    name: 'Getir Yemek', 
+    id: 'foodora', 
+    name: 'Foodora', 
     logo_url: 'https://images.unsplash.com/photo-1555992336-03a23a47b61e?w=100&h=100&fit=crop', 
-    color: '#5D4FB3' 
+    color: '#E91E63' 
   },
   { 
-    id: 'trendyol', 
-    name: 'Trendyol Yemek', 
+    id: 'resq', 
+    name: 'ResQ Club', 
     logo_url: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=100&h=100&fit=crop', 
-    color: '#F27A1A' 
+    color: '#4CAF50' 
   }
 ];
 
-// Dinamik teklifler oluştur
-function generateTurkishOffers() {
+// Finnish food items
+const FINNISH_FOOD_ITEMS = [
+  'Lohikeitto', 'Karjalanpiirakka', 'Poronkäristys', 'Mustikkapiirakka', 'Korvapuusti',
+  'Margherita Pizza', 'Pepperoni Pizza', 'Quattro Stagioni', 'Calzone',
+  'Nigiri Sushi', 'Maki Roll', 'Sashimi', 'Temaki', 'California Roll',
+  'Cheeseburger', 'Big Burger', 'Chicken Burger', 'Fish Burger', 'Veggie Burger',
+  'Kebab', 'Falafel', 'Gyros', 'Shawarma', 'Iskender',
+  'Pad Thai', 'Green Curry', 'Tom Yum', 'Massaman Curry', 'Som Tam',
+  'Chicken Tikka Masala', 'Biryani', 'Naan', 'Samosa', 'Dal',
+  'Sweet & Sour Chicken', 'Kung Pao', 'Chow Mein', 'Fried Rice', 'Spring Rolls',
+  'Caesar Salaatti', 'Tonnisalaatti', 'Kreikkalainen Salaatti'
+];
+
+// Generate Finnish offers
+function generateFinnishOffers() {
   const offers = [];
   
-  MOCK_RESTAURANTS.forEach(restaurant => {
-    MOCK_PROVIDERS.forEach(provider => {
-      const numOffers = Math.floor(Math.random() * 4) + 2; // 2-5 teklif
+  FINNISH_RESTAURANTS.forEach(restaurant => {
+    FINNISH_PROVIDERS.forEach(provider => {
+      const numOffers = Math.floor(Math.random() * 4) + 2; // 2-5 offers
       
       for (let i = 0; i < numOffers; i++) {
-        const foodItem = TURKISH_FOOD_ITEMS[Math.floor(Math.random() * TURKISH_FOOD_ITEMS.length)];
-        const originalPrice = Math.floor(Math.random() * 80) + 20; // 20-100 TL
-        const discountPercent = Math.floor(Math.random() * 40) + 15; // 15-55% indirim
+        const foodItem = FINNISH_FOOD_ITEMS[Math.floor(Math.random() * FINNISH_FOOD_ITEMS.length)];
+        const originalPrice = Math.floor(Math.random() * 25) + 8; // 8-33 EUR
+        const discountPercent = Math.floor(Math.random() * 45) + 15; // 15-60% discount
         const discountedPrice = parseFloat((originalPrice * (1 - discountPercent / 100)).toFixed(2));
         
         const endsAt = new Date();
         endsAt.setHours(endsAt.getHours() + Math.floor(Math.random() * 48) + 2);
         
-        // Türkçe yemek resmi URL'leri
+        // Food image URLs
         const foodImageIds = [1565299624946, 1555992336, 1498837167922, 1546833017, 1565958011, 1574071318];
         const imageId = foodImageIds[Math.floor(Math.random() * foodImageIds.length)];
         
@@ -137,19 +171,19 @@ function generateTurkishOffers() {
           latitude: restaurant.latitude,
           longitude: restaurant.longitude,
           title: foodItem,
-          description: `${restaurant.name} restoranından lezzetli ${foodItem.toLowerCase()}`,
+          description: `Herkullinen ${foodItem.toLowerCase()} ravintola ${restaurant.name}sta`,
           original_price: originalPrice,
           discounted_price: discountedPrice,
           discount_percent: discountPercent,
-          currency: 'TL',
-          delivery_fee: Math.floor(Math.random() * 8) + 2, // 2-10 TL
-          min_order_amount: Math.floor(Math.random() * 30) + 20, // 20-50 TL
+          currency: 'EUR',
+          delivery_fee: Math.floor(Math.random() * 6) + 1, // 1-7 EUR
+          min_order_amount: Math.floor(Math.random() * 20) + 15, // 15-35 EUR
           has_pickup: Math.random() > 0.4,
           has_delivery: true,
           starts_at: new Date(),
           ends_at: endsAt,
           image_url: `https://images.unsplash.com/photo-${imageId}?w=400&h=300&fit=crop&auto=format`,
-          tags: ['indirim', ...restaurant.cuisine_types.map(c => c.toLowerCase())],
+          tags: ['alennus', ...restaurant.cuisine_types.map(c => c.toLowerCase())],
           deep_link: `https://${provider.id}.com/restaurant/${restaurant.id}/offer/${uuidv4()}`,
           is_active: true,
           created_at: new Date(),
@@ -167,27 +201,27 @@ export async function GET(request) {
     const { pathname, searchParams } = new URL(request.url);
     const path = pathname.split('/api/')[1] || '';
 
-    // Supabase bağlantısını test et
+    // Test Supabase connection
     const connectionStatus = await testConnection();
     if (!connectionStatus.connected) {
-      console.warn('Supabase bağlantısı kurulamadı, mock veri kullanılıyor');
+      console.warn('Supabase connection failed, using mock data');
     }
 
-    // Mock teklifleri oluştur (geçici olarak)
-    const mockOffers = generateTurkishOffers();
+    // Generate Finnish offers
+    const finnishOffers = generateFinnishOffers();
 
     switch (path) {
       case 'offers':
         const city = searchParams.get('city') || '';
         const cuisine = searchParams.get('cuisine') || '';
         const minDiscount = parseInt(searchParams.get('minDiscount')) || 0;
-        const maxPrice = parseInt(searchParams.get('maxPrice')) || 500;
+        const maxPrice = parseInt(searchParams.get('maxPrice')) || 100;
         const provider = searchParams.get('provider') || '';
         const sortBy = searchParams.get('sortBy') || 'discount';
         const page = parseInt(searchParams.get('page')) || 1;
         const limit = parseInt(searchParams.get('limit')) || 12;
 
-        let filteredOffers = mockOffers.filter(offer => {
+        let filteredOffers = finnishOffers.filter(offer => {
           const matchesCity = !city || city === 'all' || offer.city.toLowerCase().includes(city.toLowerCase());
           const matchesCuisine = !cuisine || cuisine === 'all' || 
             offer.cuisine_types.some(c => c.toLowerCase().includes(cuisine.toLowerCase()));
@@ -198,7 +232,7 @@ export async function GET(request) {
           return matchesCity && matchesCuisine && matchesDiscount && matchesPrice && matchesProvider;
         });
 
-        // Sıralama
+        // Sort offers
         filteredOffers.sort((a, b) => {
           switch (sortBy) {
             case 'price':
@@ -223,38 +257,38 @@ export async function GET(request) {
         });
 
       case 'providers':
-        return NextResponse.json(MOCK_PROVIDERS);
+        return NextResponse.json(FINNISH_PROVIDERS);
 
       case 'cities':
-        const cities = [...new Set(MOCK_RESTAURANTS.map(r => r.city))];
+        const cities = [...new Set(FINNISH_RESTAURANTS.map(r => r.city))];
         return NextResponse.json(cities);
 
       case 'cuisines':
-        const cuisines = [...new Set(MOCK_RESTAURANTS.flatMap(r => r.cuisine_types))];
+        const cuisines = [...new Set(FINNISH_RESTAURANTS.flatMap(r => r.cuisine_types))];
         return NextResponse.json(cuisines);
 
       case 'stats':
-        const totalOffers = mockOffers.length;
-        const averageDiscount = Math.round(mockOffers.reduce((sum, offer) => sum + offer.discount_percent, 0) / totalOffers);
-        const totalSavings = mockOffers.reduce((sum, offer) => sum + (offer.original_price - offer.discounted_price), 0);
+        const totalOffers = finnishOffers.length;
+        const averageDiscount = Math.round(finnishOffers.reduce((sum, offer) => sum + offer.discount_percent, 0) / totalOffers);
+        const totalSavings = finnishOffers.reduce((sum, offer) => sum + (offer.original_price - offer.discounted_price), 0);
         
         return NextResponse.json({
           totalOffers,
-          activeProviders: MOCK_PROVIDERS.length,
+          activeProviders: FINNISH_PROVIDERS.length,
           averageDiscount,
           totalSavings: Math.round(totalSavings),
-          cities: [...new Set(MOCK_RESTAURANTS.map(r => r.city))].length
+          cities: [...new Set(FINNISH_RESTAURANTS.map(r => r.city))].length
         });
 
       default:
         return NextResponse.json({ 
-          message: 'FoodAi API - Türk Yemek Teklifleri Karşılaştırma Platformu',
-          status: 'Supabase entegrasyonu devam ediyor...'
+          message: 'FoodAi API - Suomen Ruokatarjousten Vertailupalvelu',
+          status: 'Supabase integraatio toiminnassa...'
         });
     }
   } catch (error) {
-    console.error('API Hatası:', error);
-    return NextResponse.json({ error: 'Sunucu Hatası' }, { status: 500 });
+    console.error('API Virhe:', error);
+    return NextResponse.json({ error: 'Sisäinen palvelinvirhe' }, { status: 500 });
   }
 }
 
@@ -268,7 +302,7 @@ export async function POST(request) {
       case 'clickouts':
         const { offerId, providerId, userId } = body;
         
-        // Supabase'e kaydet (şimdilik mock)
+        // Save to Supabase (mock for now)
         const clickout = {
           id: uuidv4(),
           offer_id: offerId,
@@ -280,15 +314,15 @@ export async function POST(request) {
           clicked_at: new Date()
         };
 
-        console.log('Clickout kaydedildi:', clickout);
+        console.log('Clickout saved:', clickout);
         
         return NextResponse.json({ success: true, clickoutId: clickout.id });
 
       default:
-        return NextResponse.json({ error: 'Bulunamadı' }, { status: 404 });
+        return NextResponse.json({ error: 'Ei löydetty' }, { status: 404 });
     }
   } catch (error) {
-    console.error('POST API Hatası:', error);
-    return NextResponse.json({ error: 'Sunucu Hatası' }, { status: 500 });
+    console.error('POST API Virhe:', error);
+    return NextResponse.json({ error: 'Sisäinen palvelinvirhe' }, { status: 500 });
   }
 }
