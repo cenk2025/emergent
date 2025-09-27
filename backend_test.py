@@ -17,29 +17,25 @@ API_BASE = f"{BASE_URL}/api"
 
 class FoodAITester:
     def __init__(self):
+        self.results = []
+        self.total_tests = 0
         self.passed_tests = 0
-        self.failed_tests = 0
-        self.test_results = []
         
-    def log_test(self, test_name, passed, details=""):
+    def log_result(self, test_name: str, passed: bool, details: str = ""):
         """Log test result"""
-        status = "✅ PASS" if passed else "❌ FAIL"
+        self.total_tests += 1
+        if passed:
+            self.passed_tests += 1
+            status = "✅ PASS"
+        else:
+            status = "❌ FAIL"
+            
         result = f"{status} - {test_name}"
         if details:
             result += f" | {details}"
-        
+            
+        self.results.append(result)
         print(result)
-        self.test_results.append({
-            'test': test_name,
-            'passed': passed,
-            'details': details,
-            'timestamp': datetime.now().isoformat()
-        })
-        
-        if passed:
-            self.passed_tests += 1
-        else:
-            self.failed_tests += 1
     
     def test_api_health(self):
         """Test basic API health and connectivity"""
