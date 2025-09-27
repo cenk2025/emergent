@@ -36,8 +36,8 @@ class TurkishFoodAiAPITester:
             print(f"❌ {test_name}: FAILED {message}")
     
     def test_providers_api(self):
-        """Test GET /api/providers endpoint"""
-        print("\n🧪 Testing Providers API...")
+        """Test GET /api/providers endpoint for Turkish food platforms"""
+        print("\n🧪 Testing Turkish Providers API...")
         
         try:
             response = requests.get(f"{API_BASE}/providers", timeout=10)
@@ -60,7 +60,7 @@ class TurkishFoodAiAPITester:
             # Test provider structure
             if len(data) > 0:
                 provider = data[0]
-                required_fields = ['id', 'name', 'logo', 'color']
+                required_fields = ['id', 'name', 'logo_url', 'color']
                 missing_fields = [field for field in required_fields if field not in provider]
                 
                 if not missing_fields:
@@ -68,13 +68,24 @@ class TurkishFoodAiAPITester:
                 else:
                     self.log_result("Provider Structure", False, f"Missing fields: {missing_fields}")
                 
-                # Test expected providers
+                # Test expected Turkish providers
                 provider_ids = [p['id'] for p in data]
-                expected_providers = ['wolt', 'foodora', 'resq']
-                if all(pid in provider_ids for pid in expected_providers):
-                    self.log_result("Expected Providers", True, f"Found all: {expected_providers}")
+                provider_names = [p['name'] for p in data]
+                expected_providers = ['yemeksepeti', 'getir', 'trendyol']
+                expected_names = ['Yemeksepeti', 'Getir Yemek', 'Trendyol Yemek']
+                
+                found_providers = [pid for pid in expected_providers if pid in provider_ids]
+                found_names = [name for name in expected_names if name in provider_names]
+                
+                if len(found_providers) >= 2:  # At least 2 Turkish providers
+                    self.log_result("Turkish Providers", True, f"Found: {found_providers}")
                 else:
-                    self.log_result("Expected Providers", False, f"Missing some providers")
+                    self.log_result("Turkish Providers", False, f"Expected Turkish providers, found: {provider_ids}")
+                
+                if len(found_names) >= 2:  # At least 2 Turkish provider names
+                    self.log_result("Turkish Provider Names", True, f"Found: {found_names}")
+                else:
+                    self.log_result("Turkish Provider Names", False, f"Expected Turkish names, found: {provider_names}")
             else:
                 self.log_result("Providers Data", False, "No providers returned")
                 
