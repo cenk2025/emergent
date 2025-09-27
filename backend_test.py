@@ -93,6 +93,23 @@ class FinnishFoodAITester:
                     self.log_test(f"Provider {expected} Present", True)
                 else:
                     self.log_test(f"Provider {expected} Present", False, f"Missing {expected}")
+            
+            # Check provider structure
+            for provider in providers:
+                required_fields = ['id', 'name', 'logo_url', 'color']
+                missing_fields = [field for field in required_fields if field not in provider]
+                
+                if not missing_fields:
+                    self.log_test(f"Provider {provider.get('name')} Structure", True)
+                else:
+                    self.log_test(f"Provider {provider.get('name')} Structure", False, 
+                                f"Missing fields: {missing_fields}")
+            
+            return len(providers) >= 3
+            
+        except Exception as e:
+            self.log_test("Providers API", False, f"Error: {str(e)}")
+            return False
     
     def test_finnish_cuisines(self):
         """Test Finnish cuisines API"""
