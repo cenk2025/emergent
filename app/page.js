@@ -13,6 +13,7 @@ import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
+import ChatInterface from '@/components/ChatInterface';
 
 export default function FoodAi() {
   const [offers, setOffers] = useState([]);
