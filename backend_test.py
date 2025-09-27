@@ -18,7 +18,7 @@ load_dotenv()
 BASE_URL = os.getenv('NEXT_PUBLIC_BASE_URL', 'https://savorydeals.preview.emergentagent.com')
 API_BASE = f"{BASE_URL}/api"
 
-class FoodAiAPITester:
+class TurkishFoodAiAPITester:
     def __init__(self):
         self.test_results = {
             'passed': 0,
