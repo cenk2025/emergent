@@ -142,10 +142,10 @@ export default function FoodAi() {
               FoodAi.fi
             </div>
             <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-              Löydä parhaat ruokatarjoukset
+              En İyi Yemek Fırsatlarını Keşfet
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Vertaile alennuksia Woltista, Foodorasta ja ResQ Clubista. Säästä aikaa ja rahaa.
+              Yemeksepeti, Getir ve Trendyol Yemek'teki indirimli fırsatları karşılaştır. Zamandan ve paradan tasarruf et.
             </p>
             
             {/* Stats */}
