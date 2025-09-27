@@ -7,10 +7,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
-import { MapPin, Clock, Star, Percent, Euro, Truck, ShoppingBag, Search, Filter, Loader2 } from 'lucide-react';
+import { MapPin, Clock, Star, Percent, Euro, Truck, ShoppingBag, Search, Filter, Loader2, User, Settings, LogOut } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { useAuth } from '@/contexts/AuthContext';
+import Link from 'next/link';
 
 export default function FoodAi() {
   const [offers, setOffers] = useState([]);
@@ -30,8 +32,86 @@ export default function FoodAi() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [language, setLanguage] = useState('fi'); // Language state
   
   const { theme, setTheme } = useTheme();
+  const { user, isAdmin, signOut } = useAuth();
+
+  // Language texts
+  const t = {
+    fi: {
+      title: 'Löydä parhaat ruokatarjoukset',
+      subtitle: 'Vertaile alennuksia Woltista, Foodorasta ja ResQ Clubista. Säästä aikaa ja rahaa.',
+      offers: 'Tarjouksia',
+      avgDiscount: 'Keskialennus',
+      providers: 'Palvelua',
+      savings: 'Säästöjä',
+      filters: 'Suodattimet',
+      clear: 'Tyhjennä',
+      city: 'Kaupunki',
+      selectCity: 'Valitse kaupunki',
+      allCities: 'Kaikki kaupungit',
+      cuisine: 'Keittiötyyppi',
+      selectCuisine: 'Valitse keittiö',
+      allCuisines: 'Kaikki keittiöt',
+      service: 'Palvelu',
+      selectService: 'Valitse palvelu',
+      allServices: 'Kaikki palvelut',
+      minDiscount: 'Min. alennus',
+      maxPrice: 'Max. hinta',
+      sort: 'Järjestys',
+      biggestDiscount: 'Suurin alennus',
+      lowestPrice: 'Halvin hinta',
+      bestRating: 'Paras arvosana',
+      offersFound: 'tarjousta löytyi',
+      orderNow: 'Tilaa nyt - Säästä',
+      previous: 'Edellinen',
+      next: 'Seuraava',
+      noOffers: 'Ei tarjouksia löytynyt valituilla suodattimilla',
+      clearFilters: 'Tyhjennä suodattimet',
+      signIn: 'Kirjaudu sisään',
+      signOut: 'Kirjaudu ulos',
+      admin: 'Admin',
+      profile: 'Profiili'
+    },
+    en: {
+      title: 'Find the best food deals',
+      subtitle: 'Compare discounts from Wolt, Foodora and ResQ Club. Save time and money.',
+      offers: 'Offers',
+      avgDiscount: 'Avg Discount',
+      providers: 'Providers',
+      savings: 'Savings',
+      filters: 'Filters',
+      clear: 'Clear',
+      city: 'City',
+      selectCity: 'Select city',
+      allCities: 'All cities',
+      cuisine: 'Cuisine',
+      selectCuisine: 'Select cuisine',
+      allCuisines: 'All cuisines',
+      service: 'Service',
+      selectService: 'Select service',
+      allServices: 'All services',
+      minDiscount: 'Min. discount',
+      maxPrice: 'Max. price',
+      sort: 'Sort',
+      biggestDiscount: 'Biggest discount',
+      lowestPrice: 'Lowest price',
+      bestRating: 'Best rating',
+      offersFound: 'offers found',
+      orderNow: 'Order now - Save',
+      previous: 'Previous',
+      next: 'Next',
+      noOffers: 'No offers found with selected filters',
+      clearFilters: 'Clear filters',
+      signIn: 'Sign In',
+      signOut: 'Sign Out',
+      admin: 'Admin',
+      profile: 'Profile'
+    }
+  };
+
+  const texts = t[language];
 
   // Fetch initial data
   useEffect(() => {
