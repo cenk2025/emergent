@@ -467,7 +467,7 @@ class FinnishFoodAITester:
     
     # Old Turkish test methods removed - using Finnish tests instead
     
-    def test_offers_api_basic(self):
+    def run_all_tests(self):
         """Test basic GET /api/offers endpoint for Turkish food offers"""
         print("\n🧪 Testing Turkish Food Offers API...")
         
