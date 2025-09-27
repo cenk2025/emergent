@@ -267,7 +267,14 @@ function generateFinnishOffers() {
         endsAt.setHours(endsAt.getHours() + Math.floor(Math.random() * 48) + 2);
         
         // Food image URLs
-        const foodImageIds = [1565299624946, 1555992336, 1498837167922, 1546833017, 1565958011, 1574071318];
+        const foodImageIds = [
+          '1565299624946-b28f40a0ca4b', 
+          '1555992336-03a23a47b61e', 
+          '1498837167922-ddd27525d352', 
+          '1546833017-cc146d0aa952', 
+          '1565958011-293a49ba1c2e', 
+          '1574071318-ff4dc0252813'
+        ];
         const imageId = foodImageIds[Math.floor(Math.random() * foodImageIds.length)];
         
         offers.push({
