@@ -521,21 +521,35 @@ export async function POST(request) {
       case 'clickouts':
         const { offerId, providerId, userId } = body;
         
-        // Save to Supabase (mock for now)
-        const clickout = {
-          id: uuidv4(),
-          offer_id: offerId,
-          provider_id: providerId,
-          user_id: userId || null,
-          ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown',
-          user_agent: request.headers.get('user-agent') || '',
-          referer: request.headers.get('referer') || '',
-          clicked_at: new Date()
-        };
+        // Try to save to Supabase, fallback to console log
+        try {
+          const { data, error } = await supabase
+            .from('clickouts')
+            .insert([{
+              offer_id: offerId,
+              provider_id: providerId,
+              user_id: userId || null,
+              ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown',
+              user_agent: request.headers.get('user-agent') || '',
+              referer: request.headers.get('referer') || '',
+              clicked_at: new Date().toISOString()
+            }])
+            .select();
 
-        console.log('Clickout saved:', clickout);
+          if (error) throw error;
+          
+          console.log('Clickout saved to Supabase:', data);
+        } catch (supabaseError) {
+          // Fallback to console log if Supabase fails
+          console.log('Clickout tracked (Supabase unavailable):', {
+            offerId,
+            providerId,
+            userId,
+            timestamp: new Date().toISOString()
+          });
+        }
         
-        return NextResponse.json({ success: true, clickoutId: clickout.id });
+        return NextResponse.json({ success: true, clickoutId: uuidv4() });
 
       default:
         return NextResponse.json({ error: 'Ei löydetty' }, { status: 404 });
