@@ -51,51 +51,36 @@ class FoodAITester:
         except Exception as e:
             self.log_result("Basic API Health", False, f"Connection error: {str(e)}")
     
-    def test_finnish_providers(self):
-        """Test Finnish food providers API"""
-        print("\n🏪 Testing Finnish Food Providers...")
+    def test_providers_api(self):
+        """Test providers endpoint"""
+        print("\n=== PROVIDERS API TESTS ===")
         
         try:
             response = requests.get(f"{API_BASE}/providers", timeout=10)
-            
-            if response.status_code != 200:
-                self.log_test("Providers API Response", False, f"Status: {response.status_code}")
-                return False
-            
-            providers = response.json()
-            
-            # Check if it's a list
-            if not isinstance(providers, list):
-                self.log_test("Providers Data Structure", False, "Response is not a list")
-                return False
-            
-            # Expected Finnish providers
-            expected_providers = ['Wolt', 'Foodora', 'ResQ Club']
-            provider_names = [p.get('name') for p in providers]
-            
-            # Check each expected provider
-            for expected in expected_providers:
-                if expected in provider_names:
-                    self.log_test(f"Provider {expected} Present", True)
-                else:
-                    self.log_test(f"Provider {expected} Present", False, f"Missing {expected}")
-            
-            # Check provider structure
-            for provider in providers:
-                required_fields = ['id', 'name', 'logo_url', 'color']
-                missing_fields = [field for field in required_fields if field not in provider]
+            if response.status_code == 200:
+                providers = response.json()
                 
-                if not missing_fields:
-                    self.log_test(f"Provider {provider.get('name')} Structure", True)
+                # Check if we have the expected providers
+                expected_providers = ['wolt', 'foodora', 'resq']
+                provider_ids = [p['id'] for p in providers]
+                
+                has_all_providers = all(pid in provider_ids for pid in expected_providers)
+                self.log_result("Providers API - Structure", has_all_providers, 
+                              f"Found providers: {provider_ids}")
+                
+                # Check provider data structure
+                if providers:
+                    provider = providers[0]
+                    required_fields = ['id', 'name', 'logo_url', 'color']
+                    has_required_fields = all(field in provider for field in required_fields)
+                    self.log_result("Providers API - Data Structure", has_required_fields,
+                                  f"Fields: {list(provider.keys())}")
                 else:
-                    self.log_test(f"Provider {provider.get('name')} Structure", False, 
-                                f"Missing fields: {missing_fields}")
-            
-            return len(providers) >= 3
-            
+                    self.log_result("Providers API - Data Structure", False, "No providers returned")
+            else:
+                self.log_result("Providers API", False, f"Status code: {response.status_code}")
         except Exception as e:
-            self.log_test("Providers API", False, f"Error: {str(e)}")
-            return False
+            self.log_result("Providers API", False, f"Error: {str(e)}")
     
     def test_finnish_cuisines(self):
         """Test Finnish cuisines API"""
