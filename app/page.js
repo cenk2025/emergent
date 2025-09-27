@@ -21,9 +21,9 @@ export default function FoodAi() {
   const [stats, setStats] = useState({});
   
   // Filter states
-  const [selectedCity, setSelectedCity] = useState('');
-  const [selectedCuisine, setSelectedCuisine] = useState('');
-  const [selectedProvider, setSelectedProvider] = useState('');
+  const [selectedCity, setSelectedCity] = useState('all');
+  const [selectedCuisine, setSelectedCuisine] = useState('all');
+  const [selectedProvider, setSelectedProvider] = useState('all');
   const [minDiscount, setMinDiscount] = useState([10]);
   const [maxPrice, setMaxPrice] = useState([50]);
   const [sortBy, setSortBy] = useState('discount');
