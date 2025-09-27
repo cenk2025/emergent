@@ -191,7 +191,7 @@ export default function FoodAi() {
     setSelectedCuisine('all');
     setSelectedProvider('all');
     setMinDiscount([10]);
-    setMaxPrice([50]);
+    setMaxPrice([200]);
     setCurrentPage(1);
   };
 
