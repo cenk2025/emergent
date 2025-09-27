@@ -511,7 +511,7 @@ export default function FoodAi() {
                       onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                       disabled={currentPage === 1}
                     >
-                      Edellinen
+                      {texts.previous}
                     </Button>
                     
                     <div className="flex items-center gap-2">
@@ -535,7 +535,7 @@ export default function FoodAi() {
                       onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                       disabled={currentPage === totalPages}
                     >
-                      Seuraava
+                      {texts.next}
                     </Button>
                   </div>
                 )}
@@ -543,10 +543,10 @@ export default function FoodAi() {
                 {offers.length === 0 && !loading && (
                   <div className="text-center py-12">
                     <div className="text-muted-foreground text-lg mb-4">
-                      Ei tarjouksia löytynyt valituilla suodattimilla
+                      {texts.noOffers}
                     </div>
                     <Button variant="outline" onClick={resetFilters}>
-                      Tyhjennä suodattimet
+                      {texts.clearFilters}
                     </Button>
                   </div>
                 )}
