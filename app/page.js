@@ -25,7 +25,7 @@ export default function FoodAi() {
   const [selectedCuisine, setSelectedCuisine] = useState('all');
   const [selectedProvider, setSelectedProvider] = useState('all');
   const [minDiscount, setMinDiscount] = useState([10]);
-  const [maxPrice, setMaxPrice] = useState([100]);
+  const [maxPrice, setMaxPrice] = useState([50]);
   const [sortBy, setSortBy] = useState('discount');
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
