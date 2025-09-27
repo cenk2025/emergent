@@ -319,15 +319,15 @@ export default function FoodAi() {
                       <CardContent className="p-4">
                         <div className="flex items-center gap-2 mb-2">
                           <img 
-                            src={offer.providerLogo} 
-                            alt={offer.providerName}
+                            src={offer.provider_logo} 
+                            alt={offer.provider_name}
                             className="w-6 h-6 rounded"
                           />
-                          <span className="text-sm text-muted-foreground">{offer.providerName}</span>
+                          <span className="text-sm text-muted-foreground">{offer.provider_name}</span>
                         </div>
                         
                         <h3 className="font-semibold text-lg mb-1">{offer.title}</h3>
-                        <p className="text-sm text-muted-foreground mb-2">{offer.restaurantName}</p>
+                        <p className="text-sm text-muted-foreground mb-2">{offer.restaurant_name}</p>
                         
                         <div className="flex items-center gap-2 mb-3">
                           <MapPin className="w-4 h-4 text-muted-foreground" />
@@ -337,7 +337,7 @@ export default function FoodAi() {
                         </div>
                         
                         <div className="flex items-center gap-2 mb-3">
-                          {offer.cuisine.map(c => (
+                          {offer.cuisine_types?.map(c => (
                             <Badge key={c} variant="secondary" className="text-xs">
                               {c}
                             </Badge>
@@ -347,15 +347,15 @@ export default function FoodAi() {
                         <div className="flex items-center justify-between mb-4">
                           <div>
                             <span className="text-lg font-bold text-green-600">
-                              €{offer.discountedPrice}
+                              ₺{offer.discounted_price}
                             </span>
                             <span className="text-sm text-muted-foreground line-through ml-2">
-                              €{offer.originalPrice}
+                              ₺{offer.original_price}
                             </span>
                           </div>
                           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                            {offer.delivery && <Truck className="w-4 h-4" />}
-                            {offer.pickup && <ShoppingBag className="w-4 h-4" />}
+                            {offer.has_delivery && <Truck className="w-4 h-4" />}
+                            {offer.has_pickup && <ShoppingBag className="w-4 h-4" />}
                           </div>
                         </div>
                         
@@ -363,7 +363,7 @@ export default function FoodAi() {
                           className="w-full" 
                           onClick={() => handleClickout(offer)}
                         >
-                          Tilaa nyt - Säästä €{(offer.originalPrice - offer.discountedPrice).toFixed(2)}
+                          Sipariş Ver - ₺{(offer.original_price - offer.discounted_price).toFixed(2)} Tasarruf
                         </Button>
                       </CardContent>
                     </Card>
