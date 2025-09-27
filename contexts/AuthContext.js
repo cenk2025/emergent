@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import { createBrowserClient } from '@/lib/supabase-auth';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
 
 const AuthContext = createContext({});
@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const router = useRouter();
-  const supabase = createBrowserClient();
+  const supabase = createClientComponentClient();
 
   useEffect(() => {
     // Get initial session
