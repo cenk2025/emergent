@@ -106,19 +106,22 @@ const FINNISH_PROVIDERS = [
     id: 'wolt', 
     name: 'Wolt', 
     logo_url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=100&h=100&fit=crop', 
-    color: '#00C2E8' 
+    color: '#00C2E8',
+    commission_rate: 8.50
   },
   { 
     id: 'foodora', 
     name: 'Foodora', 
     logo_url: 'https://images.unsplash.com/photo-1555992336-03a23a47b61e?w=100&h=100&fit=crop', 
-    color: '#E91E63' 
+    color: '#E91E63',
+    commission_rate: 7.20
   },
   { 
     id: 'resq', 
     name: 'ResQ Club', 
     logo_url: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=100&h=100&fit=crop', 
-    color: '#4CAF50' 
+    color: '#4CAF50',
+    commission_rate: 12.00
   }
 ];
 
@@ -134,6 +137,117 @@ const FINNISH_FOOD_ITEMS = [
   'Sweet & Sour Chicken', 'Kung Pao', 'Chow Mein', 'Fried Rice', 'Spring Rolls',
   'Caesar Salaatti', 'Tonnisalaatti', 'Kreikkalainen Salaatti'
 ];
+
+// Auto-create Supabase tables if they don't exist
+async function ensureSupabaseTables() {
+  try {
+    // Test if tables exist by querying providers
+    const { data, error } = await supabase
+      .from('providers')
+      .select('count')
+      .limit(1);
+    
+    if (error && error.code === 'PGRST116') {
+      // Tables don't exist, create them with basic structure
+      console.log('Creating Supabase tables...');
+      
+      // Note: We can't create tables directly via client, but we can insert seed data
+      // The tables should be created manually via SQL Editor
+      await seedSupabaseData();
+      return false; // Tables still need manual creation
+    }
+    
+    return true; // Tables exist
+  } catch (err) {
+    console.error('Error checking Supabase tables:', err);
+    return false;
+  }
+}
+
+// Seed Supabase with initial data
+async function seedSupabaseData() {
+  try {
+    // Check if providers already exist
+    const { data: existingProviders } = await supabase
+      .from('providers')
+      .select('id')
+      .limit(1);
+
+    if (!existingProviders || existingProviders.length === 0) {
+      // Insert providers
+      await supabase.from('providers').insert([
+        {
+          id: 'wolt',
+          name: 'Wolt',
+          logo_url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=100&h=100&fit=crop',
+          color: '#00C2E8',
+          website: 'https://wolt.com',
+          commission_rate: 8.50,
+          is_active: true
+        },
+        {
+          id: 'foodora',
+          name: 'Foodora',
+          logo_url: 'https://images.unsplash.com/photo-1555992336-03a23a47b61e?w=100&h=100&fit=crop',
+          color: '#E91E63',
+          website: 'https://foodora.fi',
+          commission_rate: 7.20,
+          is_active: true
+        },
+        {
+          id: 'resq',
+          name: 'ResQ Club',
+          logo_url: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=100&h=100&fit=crop',
+          color: '#4CAF50',
+          website: 'https://resq-club.com',
+          commission_rate: 12.00,
+          is_active: true
+        }
+      ]);
+
+      // Insert restaurants
+      await supabase.from('restaurants').insert([
+        {
+          id: 'rest_1',
+          name: 'Ravintola Savoy',
+          city: 'Helsinki',
+          district: 'Keskusta',
+          cuisine_types: ['Suomalainen', 'Fine Dining'],
+          rating: 4.8,
+          latitude: 60.1699,
+          longitude: 24.9384,
+          is_active: true
+        },
+        {
+          id: 'rest_2',
+          name: 'Pizzeria da Mario',
+          city: 'Helsinki', 
+          district: 'Kallio',
+          cuisine_types: ['Pizza', 'Italiana'],
+          rating: 4.3,
+          latitude: 60.1841,
+          longitude: 24.9511,
+          is_active: true
+        },
+        {
+          id: 'rest_3',
+          name: 'Sushi Zen',
+          city: 'Tampere',
+          district: 'Keskusta',
+          cuisine_types: ['Sushi', 'Japanilainen'],
+          rating: 4.6,
+          latitude: 61.4981,
+          longitude: 23.7608,
+          is_active: true
+        }
+      ]);
+
+      console.log('Supabase seeded with initial data');
+    }
+  } catch (error) {
+    console.error('Error seeding Supabase data:', error);
+  }
+}
 
 // Generate Finnish offers
 function generateFinnishOffers() {
@@ -187,13 +301,39 @@ function generateFinnishOffers() {
           deep_link: `https://${provider.id}.com/restaurant/${restaurant.id}/offer/${uuidv4()}`,
           is_active: true,
           created_at: new Date(),
-          updated_at: new Date()
+          updated_at: new Date(),
+          clickCount: Math.floor(Math.random() * 50),
+          revenue: parseFloat((Math.random() * 200).toFixed(2))
         });
       }
     });
   });
   
   return offers;
+}
+
+// Generate mock admin data
+function generateMockAdminData(offers) {
+  const totalRevenue = offers.reduce((sum, offer) => sum + (offer.revenue || 0), 0);
+  const totalClicks = offers.reduce((sum, offer) => sum + (offer.clickCount || 0), 0);
+  const totalConversions = Math.floor(totalClicks * 0.08); // 8% conversion rate
+  
+  return {
+    totalRevenue: totalRevenue.toFixed(2),
+    totalClicks,
+    totalConversions,
+    conversionRate: ((totalConversions / totalClicks) * 100).toFixed(1),
+    activeOffers: offers.filter(o => o.is_active).length,
+    totalOffers: offers.length,
+    revenueGrowth: 12,
+    clicksGrowth: 8,
+    monthlyRevenue: (totalRevenue * 0.4).toFixed(2),
+    weeklyRevenue: (totalRevenue * 0.1).toFixed(2),
+    dailyAvgRevenue: (totalRevenue / 30).toFixed(2),
+    avgRevenuePerClick: (totalRevenue / totalClicks).toFixed(2),
+    expiringOffers: Math.floor(offers.length * 0.1),
+    expiredOffers: Math.floor(offers.length * 0.05)
+  };
 }
 
 export async function GET(request) {
