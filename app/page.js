@@ -290,7 +290,7 @@ export default function FoodAi() {
               <>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold">
-                    {offers.length} teklif bulundu
+                    {offers.length} tarjousta löytyi
                   </h2>
                 </div>
 
