@@ -913,8 +913,14 @@ class FinnishFoodAITester:
         # Run all test suites
         test_suites = [
             self.test_api_health,
+            self.test_supabase_integration,
             self.test_finnish_providers,
-            self.test_finnish_cities
+            self.test_finnish_cities,
+            self.test_finnish_cuisines,
+            self.test_finnish_offers,
+            self.test_offers_filtering,
+            self.test_clickout_tracking,
+            self.test_statistics
         ]
         
         for test_suite in test_suites:
