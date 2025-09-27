@@ -423,7 +423,7 @@ export default function FoodAi() {
               <>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold">
-                    {offers.length} tarjousta löytyi
+                    {offers.length} {texts.offersFound}
                   </h2>
                 </div>
 
@@ -432,19 +432,19 @@ export default function FoodAi() {
                     <Card key={offer.id} className="group hover:shadow-lg transition-all duration-200 overflow-hidden">
                       <div className="relative">
                         <img 
-                          src={offer.imageUrl} 
+                          src={offer.image_url} 
                           alt={offer.title}
                           className="w-full h-48 object-cover"
                         />
                         <div className="absolute top-3 left-3">
                           <Badge className="bg-green-500 text-white font-bold">
-                            -{offer.discountPercent}%
+                            -{offer.discount_percent}%
                           </Badge>
                         </div>
                         <div className="absolute top-3 right-3">
                           <div className="flex items-center gap-1 bg-black/70 text-white px-2 py-1 rounded text-sm">
                             <Clock className="w-3 h-3" />
-                            {formatTimeRemaining(offer.endsAt)}
+                            {formatTimeRemaining(offer.ends_at)}
                           </div>
                         </div>
                       </div>
@@ -496,7 +496,7 @@ export default function FoodAi() {
                           className="w-full" 
                           onClick={() => handleClickout(offer)}
                         >
-                          Tilaa nyt - Säästä €{(offer.original_price - offer.discounted_price).toFixed(2)}
+                          {texts.orderNow} €{(offer.original_price - offer.discounted_price).toFixed(2)}
                         </Button>
                       </CardContent>
                     </Card>
