@@ -175,12 +175,12 @@ export default function FoodAi() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           offerId: offer.id,
-          providerId: offer.providerId
+          providerId: offer.provider_id
         })
       });
       
       // In production, this would redirect to the actual provider
-      window.open(offer.deepLink, '_blank');
+      window.open(offer.deep_link, '_blank');
     } catch (error) {
       console.error('Error tracking clickout:', error);
     }
