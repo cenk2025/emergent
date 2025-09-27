@@ -107,9 +107,9 @@ export default function FoodAi() {
   };
 
   const resetFilters = () => {
-    setSelectedCity('');
-    setSelectedCuisine('');
-    setSelectedProvider('');
+    setSelectedCity('all');
+    setSelectedCuisine('all');
+    setSelectedProvider('all');
     setMinDiscount([10]);
     setMaxPrice([50]);
     setCurrentPage(1);
