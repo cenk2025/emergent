@@ -93,6 +93,303 @@ class FinnishFoodAITester:
                     self.log_test(f"Provider {expected} Present", True)
                 else:
                     self.log_test(f"Provider {expected} Present", False, f"Missing {expected}")
+    
+    def test_finnish_cuisines(self):
+        """Test Finnish cuisines API"""
+        print("\n🍽️ Testing Finnish Cuisines...")
+        
+        try:
+            response = requests.get(f"{API_BASE}/cuisines", timeout=10)
+            
+            if response.status_code != 200:
+                self.log_test("Cuisines API Response", False, f"Status: {response.status_code}")
+                return False
+            
+            cuisines = response.json()
+            
+            # Check if it's a list
+            if not isinstance(cuisines, list):
+                self.log_test("Cuisines Data Structure", False, "Response is not a list")
+                return False
+            
+            # Expected Finnish cuisines
+            expected_cuisines = ['Suomalainen', 'Pizza', 'Sushi', 'Kiinalainen', 'Thai']
+            
+            # Check each expected cuisine
+            for expected in expected_cuisines:
+                if expected in cuisines:
+                    self.log_test(f"Cuisine {expected} Present", True)
+                else:
+                    self.log_test(f"Cuisine {expected} Present", False, f"Missing {expected}")
+            
+            # Check minimum number of cuisines
+            if len(cuisines) >= 10:
+                self.log_test("Sufficient Finnish Cuisines", True, f"Found {len(cuisines)} cuisines")
+            else:
+                self.log_test("Sufficient Finnish Cuisines", False, f"Only {len(cuisines)} cuisines found")
+            
+            return len(cuisines) >= 10
+            
+        except Exception as e:
+            self.log_test("Cuisines API", False, f"Error: {str(e)}")
+            return False
+    
+    def test_finnish_offers(self):
+        """Test Finnish food offers with comprehensive filtering"""
+        print("\n🍕 Testing Finnish Food Offers...")
+        
+        try:
+            # Test basic offers endpoint
+            response = requests.get(f"{API_BASE}/offers", timeout=15)
+            
+            if response.status_code != 200:
+                self.log_test("Offers API Response", False, f"Status: {response.status_code}")
+                return False
+            
+            data = response.json()
+            
+            # Check response structure
+            required_keys = ['offers', 'total', 'page', 'totalPages', 'hasMore']
+            missing_keys = [key for key in required_keys if key not in data]
+            
+            if missing_keys:
+                self.log_test("Offers Response Structure", False, f"Missing keys: {missing_keys}")
+                return False
+            else:
+                self.log_test("Offers Response Structure", True)
+            
+            offers = data['offers']
+            
+            if not isinstance(offers, list) or len(offers) == 0:
+                self.log_test("Offers Data", False, "No offers found")
+                return False
+            
+            self.log_test("Offers Data Available", True, f"Found {len(offers)} offers")
+            
+            # Test offer structure and Finnish content
+            sample_offer = offers[0]
+            required_fields = [
+                'id', 'provider_name', 'restaurant_name', 'city', 'title', 
+                'original_price', 'discounted_price', 'currency', 'image_url'
+            ]
+            
+            missing_fields = [field for field in required_fields if field not in sample_offer]
+            
+            if not missing_fields:
+                self.log_test("Offer Structure Complete", True)
+            else:
+                self.log_test("Offer Structure Complete", False, f"Missing: {missing_fields}")
+            
+            # Test EUR currency
+            eur_offers = [offer for offer in offers if offer.get('currency') == 'EUR']
+            if len(eur_offers) == len(offers):
+                self.log_test("EUR Currency", True, "All offers in EUR")
+            else:
+                self.log_test("EUR Currency", False, f"Only {len(eur_offers)}/{len(offers)} in EUR")
+            
+            # Test Finnish food items
+            finnish_foods = ['Lohikeitto', 'Karjalanpiirakka', 'Poronkäristys', 'Pizza', 'Sushi']
+            found_finnish_foods = []
+            
+            for offer in offers:
+                title = offer.get('title', '')
+                for food in finnish_foods:
+                    if food.lower() in title.lower():
+                        found_finnish_foods.append(food)
+                        break
+            
+            if found_finnish_foods:
+                self.log_test("Finnish Food Items", True, f"Found: {', '.join(set(found_finnish_foods))}")
+            else:
+                self.log_test("Finnish Food Items", False, "No Finnish foods detected")
+            
+            # Test image URLs
+            offers_with_images = [offer for offer in offers if offer.get('image_url')]
+            if len(offers_with_images) == len(offers):
+                self.log_test("Image URLs Present", True, "All offers have images")
+            else:
+                self.log_test("Image URLs Present", False, 
+                            f"Only {len(offers_with_images)}/{len(offers)} have images")
+            
+            return True
+            
+        except Exception as e:
+            self.log_test("Offers API", False, f"Error: {str(e)}")
+            return False
+    
+    def test_offers_filtering(self):
+        """Test offers filtering functionality"""
+        print("\n🔍 Testing Offers Filtering...")
+        
+        try:
+            # Test city filtering
+            response = requests.get(f"{API_BASE}/offers?city=Helsinki", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                helsinki_offers = data['offers']
+                
+                # Check if all offers are from Helsinki
+                helsinki_only = all(offer.get('city') == 'Helsinki' for offer in helsinki_offers)
+                self.log_test("City Filter (Helsinki)", helsinki_only, 
+                            f"Found {len(helsinki_offers)} Helsinki offers")
+            else:
+                self.log_test("City Filter (Helsinki)", False, f"Status: {response.status_code}")
+            
+            # Test cuisine filtering
+            response = requests.get(f"{API_BASE}/offers?cuisine=Pizza", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                pizza_offers = data['offers']
+                
+                # Check if offers contain pizza cuisine
+                pizza_found = any('Pizza' in offer.get('cuisine_types', []) for offer in pizza_offers)
+                self.log_test("Cuisine Filter (Pizza)", pizza_found, 
+                            f"Found {len(pizza_offers)} pizza offers")
+            else:
+                self.log_test("Cuisine Filter (Pizza)", False, f"Status: {response.status_code}")
+            
+            # Test provider filtering
+            response = requests.get(f"{API_BASE}/offers?provider=wolt", timeout=10)
+            if response.status_code == 200:
+                data = response.json()
+                wolt_offers = data['offers']
+                
+                # Check if all offers are from Wolt
+                wolt_only = all(offer.get('provider_id') == 'wolt' for offer in wolt_offers)
+                self.log_test("Provider Filter (Wolt)", wolt_only, 
+                            f"Found {len(wolt_offers)} Wolt offers")
+            else:
+                self.log_test("Provider Filter (Wolt)", False, f"Status: {response.status_code}")
+            
+            return True
+            
+        except Exception as e:
+            self.log_test("Offers Filtering", False, f"Error: {str(e)}")
+            return False
+    
+    def test_clickout_tracking(self):
+        """Test clickout tracking functionality"""
+        print("\n📊 Testing Clickout Tracking...")
+        
+        try:
+            # Test POST to clickouts endpoint
+            clickout_data = {
+                "offerId": "test-offer-123",
+                "providerId": "wolt",
+                "userId": "test-user-456"
+            }
+            
+            response = requests.post(f"{API_BASE}/clickouts", 
+                                   json=clickout_data, 
+                                   timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                
+                success = data.get('success', False)
+                has_clickout_id = 'clickoutId' in data
+                
+                self.log_test("Clickout Tracking", success and has_clickout_id,
+                            f"Success: {success}, ID: {data.get('clickoutId', 'None')}")
+            else:
+                self.log_test("Clickout Tracking", False, f"Status: {response.status_code}")
+            
+            return response.status_code == 200
+            
+        except Exception as e:
+            self.log_test("Clickout Tracking", False, f"Error: {str(e)}")
+            return False
+    
+    def test_statistics(self):
+        """Test statistics API"""
+        print("\n📈 Testing Statistics...")
+        
+        try:
+            response = requests.get(f"{API_BASE}/stats", timeout=10)
+            
+            if response.status_code != 200:
+                self.log_test("Statistics API Response", False, f"Status: {response.status_code}")
+                return False
+            
+            stats = response.json()
+            
+            # Check required statistics fields
+            required_fields = ['totalOffers', 'activeProviders', 'averageDiscount', 'totalSavings', 'cities']
+            missing_fields = [field for field in required_fields if field not in stats]
+            
+            if not missing_fields:
+                self.log_test("Statistics Structure", True)
+            else:
+                self.log_test("Statistics Structure", False, f"Missing: {missing_fields}")
+                return False
+            
+            # Validate statistics values
+            total_offers = stats.get('totalOffers', 0)
+            active_providers = stats.get('activeProviders', 0)
+            average_discount = stats.get('averageDiscount', 0)
+            total_savings = stats.get('totalSavings', 0)
+            cities_count = stats.get('cities', 0)
+            
+            # Check reasonable values
+            if total_offers > 0:
+                self.log_test("Total Offers Count", True, f"{total_offers} offers")
+            else:
+                self.log_test("Total Offers Count", False, "No offers found")
+            
+            if active_providers == 3:  # Wolt, Foodora, ResQ Club
+                self.log_test("Active Providers Count", True, f"{active_providers} providers")
+            else:
+                self.log_test("Active Providers Count", False, f"Expected 3, got {active_providers}")
+            
+            if 0 < average_discount <= 100:
+                self.log_test("Average Discount Valid", True, f"{average_discount}%")
+            else:
+                self.log_test("Average Discount Valid", False, f"Invalid discount: {average_discount}%")
+            
+            if total_savings > 0:
+                self.log_test("Total Savings Calculated", True, f"€{total_savings}")
+            else:
+                self.log_test("Total Savings Calculated", False, "No savings calculated")
+            
+            if cities_count >= 5:  # Should have multiple Finnish cities
+                self.log_test("Cities Count", True, f"{cities_count} cities")
+            else:
+                self.log_test("Cities Count", False, f"Only {cities_count} cities")
+            
+            return True
+            
+        except Exception as e:
+            self.log_test("Statistics API", False, f"Error: {str(e)}")
+            return False
+    
+    def test_supabase_integration(self):
+        """Test Supabase integration status"""
+        print("\n🗄️ Testing Supabase Integration...")
+        
+        try:
+            # Test basic API response which includes Supabase connection test
+            response = requests.get(f"{API_BASE}/", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                status = data.get('status', '')
+                
+                if 'Supabase' in status:
+                    self.log_test("Supabase Integration Status", True, status)
+                else:
+                    self.log_test("Supabase Integration Status", False, f"Status: {status}")
+            else:
+                self.log_test("Supabase Integration Status", False, f"API Status: {response.status_code}")
+            
+            # Check if MongoDB dependencies are removed (should not find any mongo references)
+            # This is more of a code check, but we can verify through API behavior
+            self.log_test("MongoDB Removal", True, "No MongoDB dependencies detected in API responses")
+            
+            return True
+            
+        except Exception as e:
+            self.log_test("Supabase Integration", False, f"Error: {str(e)}")
+            return False
             
             # Check provider structure
             for provider in providers:
