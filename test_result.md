@@ -102,113 +102,80 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Build FoodAi.fi - a trivago-like metasearch for discounted food offers in Finland. Aggregate deals from multiple providers (Wolt, Foodora, ResQ Club), normalize data, deduplicate, rank, and present with clickout tracking (CPC/CPA style). Include admin panel, modern UI, DeepSeek chatbot, Supabase DB, Firebase Auth, i18n (Finnish default), and theme support."
+user_problem_statement: "Supabase veritabanını kullan. Firebase'yi temizle. Supabase'yi yeniden yapılandır. Ürünlerde resimler olsun. FoodAi - Türk yemek tekliflerini karşılaştırma platformu."
 
 backend:
-  - task: "Mock Providers API"
+  - task: "Supabase Integration"
     implemented: true
-    working: true
-    file: "/app/app/api/[[...path]]/route.js"
+    working: "NA"
+    file: "/app/lib/supabase.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "Implemented mock providers endpoint with Wolt, Foodora, ResQ Club data"
-      - working: true
-        agent: "testing"
-        comment: "✅ PASSED - GET /api/providers returns proper array with all 3 providers (Wolt, Foodora, ResQ Club). All required fields (id, name, logo, color) present and valid."
+        comment: "Supabase client kuruldu, PostgreSQL veritabanı entegrasyonu yapıldı"
 
-  - task: "Mock Restaurants Data"
+  - task: "Turkish Food Providers API"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/app/api/[[...path]]/route.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "Created mock restaurants data for Helsinki, Tampere, Turku with cuisines and ratings"
-      - working: true
-        agent: "testing"
-        comment: "✅ PASSED - GET /api/cities returns all expected cities [Helsinki, Tampere, Turku]. GET /api/cuisines returns all expected cuisines [Italian, Japanese, American, Thai, European, Indian]. Restaurant data properly integrated into offers."
+        comment: "Türk yemek platformları eklendi: Yemeksepeti, Getir Yemek, Trendyol Yemek"
 
-  - task: "Dynamic Offers Generation"
+  - task: "Turkish Restaurants & Cities"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/app/api/[[...path]]/route.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "Implemented dynamic offer generation with realistic pricing, discounts, and expiry times"
-      - working: true
-        agent: "testing"
-        comment: "✅ PASSED - Dynamic offers generation working perfectly. Generated 52+ offers with realistic pricing (€8-28), discount percentages (10-50%), proper structure with all required fields (id, providerId, restaurantName, city, cuisine, title, originalPrice, discountedPrice, discountPercent, etc.)."
+        comment: "Türk şehirleri ve restoranları eklendi: İstanbul, Ankara, İzmir vb."
 
-  - task: "Offers API with Filtering"
+  - task: "Turkish Food Offers with Images"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/app/api/[[...path]]/route.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "Created /api/offers endpoint with city, cuisine, discount, price, provider filtering"
-      - working: true
-        agent: "testing"
-        comment: "✅ PASSED - All filtering works perfectly: City filter (Helsinki), Cuisine filter (Italian), Provider filter (Wolt), Discount filter (30%+), Price filter (€15 max), and Combined filters. All filters properly applied and validated."
+        comment: "Türk yemekleri (kebap, pide, döner vb.) ve resimlerle dinamik teklifler oluşturuldu"
 
-  - task: "Offers API Sorting and Pagination"
+  - task: "Currency & Pricing in Turkish Lira"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/app/api/[[...path]]/route.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "NA"
         agent: "main"
-        comment: "Implemented sorting by discount/price/rating and pagination with limit/page params"
-      - working: true
-        agent: "testing"
-        comment: "✅ PASSED - Sorting works correctly: discount (descending), price (ascending), rating (descending). Pagination working with proper metadata: page numbers, total count (53), total pages (18), hasMore flag. Page 1 and Page 2 tested successfully."
+        comment: "Türk Lirası (TL) para birimi ve Türk pazarına uygun fiyatlandırma (20-100 TL)"
 
-  - task: "Clickout Tracking API"
+  - task: "MongoDB Removal"
     implemented: true
     working: true
-    file: "/app/app/api/[[...path]]/route.js"
+    file: "package.json"
     stuck_count: 0
     priority: "medium"
     needs_retesting: false
     status_history:
-      - working: "NA"
-        agent: "main"
-        comment: "Created POST /api/clickouts for tracking user clicks with IP, user agent, referer"
       - working: true
-        agent: "testing"
-        comment: "✅ PASSED - POST /api/clickouts working correctly. Accepts offerId, providerId, userId and returns success response with clickoutId. Proper JSON structure and 200 status code."
-
-  - task: "Statistics API"
-    implemented: true
-    working: true
-    file: "/app/app/api/[[...path]]/route.js"
-    stuck_count: 0
-    priority: "medium"
-    needs_retesting: false
-    status_history:
-      - working: "NA"
         agent: "main"
-        comment: "Implemented /api/stats endpoint with total offers, average discount, savings data"
-      - working: true
-        agent: "testing"
-        comment: "✅ PASSED - GET /api/stats returns valid statistics: totalOffers (52), activeProviders (3), averageDiscount (33%), totalSavings (€317). All fields present and calculations correct."
+        comment: "MongoDB bağımlılığı kaldırıldı, tüm referanslar temizlendi"
 
 frontend:
   - task: "Main FoodAi Component"
