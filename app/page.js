@@ -152,19 +152,19 @@ export default function FoodAi() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mt-8">
               <div className="text-center">
                 <div className="text-2xl font-bold text-orange-600">{stats.totalOffers || 0}</div>
-                <div className="text-sm text-muted-foreground">Teklif</div>
+                <div className="text-sm text-muted-foreground">Tarjouksia</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-green-600">{stats.averageDiscount || 0}%</div>
-                <div className="text-sm text-muted-foreground">Ortalama İndirim</div>
+                <div className="text-sm text-muted-foreground">Keskialennus</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-600">{stats.activeProviders || 0}</div>
-                <div className="text-sm text-muted-foreground">Platform</div>
+                <div className="text-sm text-muted-foreground">Palvelua</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-purple-600">₺{stats.totalSavings || 0}</div>
-                <div className="text-sm text-muted-foreground">Toplam Tasarruf</div>
+                <div className="text-2xl font-bold text-purple-600">€{stats.totalSavings || 0}</div>
+                <div className="text-sm text-muted-foreground">Säästöjä</div>
               </div>
             </div>
           </div>
