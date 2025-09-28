@@ -50,17 +50,17 @@ export default function ChatInterface({
     },
     fi: {
       title: 'FoodAi Avustaja',
-      subtitle: 'Kysy ruokatarjouksista ja ravintola-suosituksista',
-      placeholder: 'Kysymyksesi ruokatarjouksista...',
+      subtitle: 'Älykkäät ruokatarjoukset ja suositukset',
+      placeholder: 'Kysy ruokatarjouksista...',
       send: 'Lähetä',
       thinking: 'Ajattelee...',
-      welcome: '👋 Hei! Autan sinua löytämään parhaita ruokatarjouksia.',
-      welcomeSubtext: 'Kysy vaikkapa pizzatarjouksista, lounassuosituksista tai vegaanivaihtoehdoista!',
+      welcome: '🤖 Hei! Autan löytämään parhaat ruokatarjoukset Suomesta.',
+      welcomeSubtext: 'Kysy pizzatarjouksista, lounassuosituksista tai erikoisruoista!',
       suggestions: [
-        'Pizzatarjoukset lähellä minua',
-        'Parhaat hampurilaisalennukset',
+        'Pizzatarjoukset Helsingistä',
+        'Parhaat lounastarjoukset',
         'Vegaaniravintolan tarjoukset',
-        'Tämän päivän lounasspeciaalit'
+        'ResQ Club ylijäämäruoka'
       ],
       error: 'Pahoittelut, tapahtui virhe. Yritä hetken kuluttua uudelleen.',
       minimize: 'Pienennä',
