@@ -1,0 +1,39 @@
+# FoodAi Robots.txt
+# https://foodai.fi/robots.txt
+
+User-agent: *
+Allow: /
+
+# Specific directives for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Block specific paths if needed
+Disallow: /admin/
+Disallow: /api/
+Disallow: /auth/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow crawling of important pages
+Allow: /kayttoehdot
+Allow: /tietosuoja
+Allow: /saavutettavuus
+Allow: /ota-yhteytta
+
+# Sitemap location
+Sitemap: https://foodai.fi/sitemap.xml
+Sitemap: https://foodai.fi/sitemap-images.xml
+
+# Additional information
+# Host: https://foodai.fi
+# Preferred domain: foodai.fi
