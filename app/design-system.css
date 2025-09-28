@@ -1,0 +1,297 @@
+/* Tuscany Yellow Theme Design System for FoodAi */
+
+:root {
+  /* Light Theme - Tuscany Yellow Color System */
+  --color-primary: #FFB000;           /* Tuscany Yellow - Main brand color */
+  --color-primary-hover: #E09900;     /* Darker yellow for hover states */
+  --color-primary-light: #FFCF5C;    /* Light yellow for backgrounds */
+  --color-primary-ultra-light: #FFF7E6; /* Ultra light yellow */
+  
+  --color-secondary: #FF6B35;         /* Fast food orange accent */
+  --color-secondary-hover: #E55A2B;   /* Darker orange for hover */
+  --color-secondary-light: #FFB8A3;   /* Light orange */
+  
+  --color-accent: #00D4AA;            /* Modern teal for success/fresh */
+  --color-accent-hover: #00B894;      /* Darker teal */
+  --color-accent-light: #81ECDA;      /* Light teal */
+  
+  --color-red: #FF4757;               /* Error/danger red */
+  --color-red-hover: #E84057;         /* Darker red */
+  --color-red-light: #FFB3BA;         /* Light red */
+  
+  /* Neutral Colors */
+  --color-background: #FEFEFE;        /* Pure white background */
+  --color-surface: #FFFFFF;           /* Card/surface white */
+  --color-surface-hover: #F8F9FA;     /* Surface hover state */
+  
+  --color-text-primary: #2D3436;      /* Primary text - dark charcoal */
+  --color-text-secondary: #636E72;    /* Secondary text - gray */
+  --color-text-muted: #B2BEC3;        /* Muted text - light gray */
+  --color-text-inverse: #FFFFFF;      /* White text for dark backgrounds */
+  
+  --color-border: #DDD6FE;            /* Light purple border */
+  --color-border-light: #F1F3F4;      /* Very light border */
+  --color-border-strong: #A855F7;     /* Strong purple border */
+  
+  /* Fast Food Themed Gradients */
+  --gradient-primary: linear-gradient(135deg, #FFB000 0%, #FF6B35 100%);
+  --gradient-secondary: linear-gradient(135deg, #00D4AA 0%, #0984E3 100%);
+  --gradient-accent: linear-gradient(135deg, #FF6B35 0%, #E17055 100%);
+  --gradient-hero: linear-gradient(135deg, #FFB000 0%, #FF6B35 50%, #00D4AA 100%);
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(255, 176, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(255, 176, 0, 0.15);
+  --shadow-lg: 0 8px 25px rgba(255, 176, 0, 0.2);
+  --shadow-xl: 0 20px 40px rgba(255, 176, 0, 0.25);
+  
+  /* Fast Food UI Elements */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 20px;
+  --border-radius-full: 9999px;
+  
+  /* Typography */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme - Tuscany Yellow Color System */
+  --color-primary: #FFD93D;           /* Brighter yellow for dark mode */
+  --color-primary-hover: #FFED4E;     /* Even brighter for hover */
+  --color-primary-light: #FFB000;     /* Original yellow as light variant */
+  --color-primary-ultra-light: #4A3B00; /* Dark yellow background */
+  
+  --color-secondary: #FF8A50;         /* Bright orange for dark mode */
+  --color-secondary-hover: #FFA366;   /* Brighter orange hover */
+  --color-secondary-light: #FF6B35;   /* Original orange as light */
+  
+  --color-accent: #1DD1A1;            /* Bright teal for dark mode */
+  --color-accent-hover: #55EFC4;      /* Brighter teal hover */
+  --color-accent-light: #00D4AA;      /* Original teal as light */
+  
+  --color-red: #FF6B7A;               /* Softer red for dark mode */
+  --color-red-hover: #FF7675;         /* Bright red hover */
+  --color-red-light: #FF4757;         /* Original red as light */
+  
+  /* Dark Neutral Colors */
+  --color-background: #0D1117;        /* GitHub dark background */
+  --color-surface: #161B22;           /* Dark surface */
+  --color-surface-hover: #21262D;     /* Dark surface hover */
+  
+  --color-text-primary: #F0F6FC;      /* Light text primary */
+  --color-text-secondary: #8B949E;    /* Light text secondary */
+  --color-text-muted: #6E7681;        /* Light text muted */
+  --color-text-inverse: #0D1117;      /* Dark text for light backgrounds */
+  
+  --color-border: #30363D;            /* Dark border */
+  --color-border-light: #21262D;      /* Dark light border */
+  --color-border-strong: #FFD93D;     /* Yellow border for dark mode */
+  
+  /* Dark Mode Gradients */
+  --gradient-primary: linear-gradient(135deg, #FFD93D 0%, #FF8A50 100%);
+  --gradient-secondary: linear-gradient(135deg, #1DD1A1 0%, #74B9FF 100%);
+  --gradient-accent: linear-gradient(135deg, #FF8A50 0%, #FD79A8 100%);
+  --gradient-hero: linear-gradient(135deg, #FFD93D 0%, #FF8A50 50%, #1DD1A1 100%);
+  
+  /* Dark Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 25px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Fast Food Design System Utilities */
+.fast-food-button {
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--border-radius-full);
+  padding: 12px 24px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-md);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.fast-food-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.fast-food-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.fast-food-button:hover::before {
+  left: 100%;
+}
+
+.fast-food-card {
+  background: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.fast-food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-primary);
+}
+
+.fast-food-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+
+.fast-food-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--gradient-accent);
+  color: white;
+  border-radius: var(--border-radius-full);
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: var(--shadow-sm);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.fast-food-price {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-extrabold);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.fast-food-discount {
+  background: var(--color-red);
+  color: white;
+  padding: 4px 8px;
+  border-radius: var(--border-radius-sm);
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  transform: rotate(15deg);
+  box-shadow: var(--shadow-md);
+}
+
+/* Modern Typography */
+.fast-food-heading {
+  font-weight: var(--font-weight-extrabold);
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+.fast-food-subheading {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Fast Food Icons */
+.fast-food-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--gradient-primary);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease;
+}
+
+.fast-food-icon:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .fast-food-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .fast-food-card {
+    padding: 16px;
+    border-radius: var(--border-radius-md);
+  }
+  
+  .fast-food-price {
+    font-size: 1.25rem;
+  }
+}
+
+/* Animation Classes */
+.bounce-in {
+  animation: bounceIn 0.6s ease;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.slide-up {
+  animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
