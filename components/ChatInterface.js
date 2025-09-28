@@ -307,7 +307,7 @@ export default function ChatInterface({
                       variant="outline"
                       size="sm"
                       onClick={() => handleSuggestionClick(suggestion)}
-                      className="text-xs h-8 hover:bg-purple-50 hover:border-purple-300"
+                      className="text-xs h-8 hover:bg-[#FFB000]/10 hover:border-[#FFB000] hover:text-[#FFB000] transition-all"
                       disabled={isLoading}
                     >
                       {suggestion}
