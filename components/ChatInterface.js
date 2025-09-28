@@ -189,7 +189,7 @@ export default function ChatInterface({
                     transition-all duration-300 ease-in-out`}>
       <Card className="h-full flex flex-col shadow-2xl border-2">
         {/* Header */}
-        <CardHeader className="pb-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-t-lg">
+        <CardHeader className="pb-3 bg-gradient-to-r from-[#FFB000] to-[#FF6B35] text-white rounded-t-lg">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Bot className="h-5 w-5" />
