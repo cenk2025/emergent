@@ -100,28 +100,55 @@ const FINNISH_RESTAURANTS = [
   }
 ];
 
-// Finnish food providers
+// Finnish food providers - expanded with requested services
 const FINNISH_PROVIDERS = [
   { 
     id: 'wolt', 
     name: 'Wolt', 
     logo_url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=100&h=100&fit=crop', 
     color: '#00C2E8',
-    commission_rate: 8.50
+    commission_rate: 8.50,
+    website: 'https://wolt.com/fi'
   },
   { 
     id: 'foodora', 
     name: 'Foodora', 
     logo_url: 'https://images.unsplash.com/photo-1555992336-03a23a47b61e?w=100&h=100&fit=crop', 
     color: '#E91E63',
-    commission_rate: 7.20
+    commission_rate: 7.20,
+    website: 'https://www.foodora.fi'
   },
   { 
-    id: 'resq', 
+    id: 'resq_club', 
     name: 'ResQ Club', 
     logo_url: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=100&h=100&fit=crop', 
     color: '#4CAF50',
-    commission_rate: 12.00
+    commission_rate: 12.00,
+    website: 'https://www.resq-club.com/fi/'
+  },
+  { 
+    id: 'kotipizza', 
+    name: 'Kotipizza', 
+    logo_url: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=100&h=100&fit=crop', 
+    color: '#D32F2F',
+    commission_rate: 6.50,
+    website: 'https://www.kotipizza.fi/'
+  },
+  { 
+    id: 'k_ruoka', 
+    name: 'K-Ruoka', 
+    logo_url: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=100&h=100&fit=crop', 
+    color: '#FF6D00',
+    commission_rate: 5.00,
+    website: 'https://www.k-ruoka.fi/kauppa'
+  },
+  { 
+    id: 'fiksuruoka', 
+    name: 'Fiksuruoka', 
+    logo_url: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=100&h=100&fit=crop', 
+    color: '#2E7D32',
+    commission_rate: 9.00,
+    website: 'https://www.fiksuruoka.fi'
   }
 ];
 
