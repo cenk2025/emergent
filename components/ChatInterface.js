@@ -244,7 +244,7 @@ export default function ChatInterface({
                     <div
                       className={`rounded-2xl px-4 py-3 ${
                         message.role === 'user'
-                          ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white'
+                          ? 'bg-gradient-to-r from-[#FFB000] to-[#FF6B35] text-white'
                           : message.isError
                           ? 'bg-red-50 border border-red-200 text-red-800'
                           : 'bg-white border border-gray-200 text-gray-800'
