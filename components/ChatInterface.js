@@ -255,7 +255,7 @@ export default function ChatInterface({
                       </div>
                       {message.timestamp && (
                         <div className={`text-xs mt-2 ${
-                          message.role === 'user' ? 'text-purple-100' : 'text-gray-500'
+                          message.role === 'user' ? 'text-orange-100' : 'text-gray-500'
                         }`}>
                           {message.timestamp.toLocaleTimeString('fi-FI', { 
                             hour: '2-digit', 
