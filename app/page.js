@@ -252,7 +252,7 @@ export default function FoodAi() {
       <header className="sticky top-0 z-50 border-b border-gray-200/20 backdrop-blur-xl bg-white/80">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <ModernLogo size="md" />
+            <FinnishLogo size="md" />
             
             <div className="flex items-center gap-4">
               {/* Language Toggle */}
