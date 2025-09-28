@@ -746,6 +746,9 @@ export default function FoodAi() {
         language={language}
         compact={false}
       />
+      
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
