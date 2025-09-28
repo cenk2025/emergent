@@ -307,6 +307,113 @@ export default function FoodAi() {
         </div>
       </section>
 
+      {/* Sliding Partners Section */}
+      <section className="partners-section border-b border-gray-100 py-6 overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-6">
+            <p className="text-sm text-gray-600 font-medium mb-2">
+              Vertailemme tarjouksia parhaista palveluista
+            </p>
+            <div className="w-16 h-0.5 bg-gradient-to-r from-[#FFB000] to-[#FF6B35] mx-auto"></div>
+          </div>
+          
+          {/* Sliding logos container */}
+          <div className="relative">
+            <div className="flex items-center justify-center gap-8 animate-slide">
+              {/* First set of logos */}
+              <div className="flex items-center gap-8 min-w-max">
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#00C2E8] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">W</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">Wolt</span>
+                </div>
+                
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#E91E63] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">F</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">Foodora</span>
+                </div>
+                
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#4CAF50] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">R</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">ResQ Club</span>
+                </div>
+                
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#D32F2F] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">K</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">Kotipizza</span>
+                </div>
+                
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#FF6D00] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">K</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">K-Ruoka</span>
+                </div>
+                
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#2E7D32] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">F</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">Fiksuruoka</span>
+                </div>
+              </div>
+              
+              {/* Duplicate set for seamless loop */}
+              <div className="flex items-center gap-8 min-w-max">
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#00C2E8] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">W</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">Wolt</span>
+                </div>
+                
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#E91E63] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">F</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">Foodora</span>
+                </div>
+                
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#4CAF50] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">R</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">ResQ Club</span>
+                </div>
+                
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#D32F2F] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">K</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">Kotipizza</span>
+                </div>
+                
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#FF6D00] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">K</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">K-Ruoka</span>
+                </div>
+                
+                <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
+                  <div className="w-8 h-8 bg-[#2E7D32] rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-sm">F</span>
+                  </div>
+                  <span className="font-semibold text-gray-800">Fiksuruoka</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
       <section className="py-16 bg-white border-b">
         <div className="container mx-auto px-4">
