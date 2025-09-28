@@ -14,7 +14,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTr
 import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
 import ChatInterface from '@/components/ChatInterface';
-import FinnishLogo from '@/components/FinnishLogo';
+import FinnishLogo from '../components/FinnishLogo';
 
 export default function FoodAi() {
   const [offers, setOffers] = useState([]);
