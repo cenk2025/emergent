@@ -13,6 +13,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
+  metadataBase: new URL('https://foodai.fi'),
   title: {
     default: 'FoodAi - Älykkäät ruokatarjoukset Suomesta | AI-pohjainen ruokavertailu',
     template: '%s | FoodAi'
