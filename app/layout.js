@@ -6,6 +6,11 @@ import './globals.css';
 import './design-system.css';
 
 const inter = Inter({ subsets: ['latin'] });
+const poppins = Poppins({ 
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-poppins'
+});
 
 export const metadata = {
   title: 'FoodAi.fi - Löydä parhaat ruokatarjoukset Suomessa',
