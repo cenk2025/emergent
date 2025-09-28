@@ -13,18 +13,18 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: 'FoodAi - Akıllı Yemek | Türkiye\'nin En İyi Yemek Fırsatları',
-  description: 'Yemek siparişlerinde akıllı tasarruf! Wolt, Foodora ve ResQ Club\'dan en iyi fırsatları karşılaştır.',
-  keywords: 'akıllı yemek, yemek fırsatları, indirim, wolt, foodora, resq club, yemek siparişi, tasarruf, türkiye',
+  title: 'FoodAi - Älykkäät ruokatarjoukset Suomesta',
+  description: 'Löydä parhaat ruokatarjoukset Woltista, Foodorasta, ResQ Clubista ja muista palveluista. Säästä aikaa ja rahaa.',
+  keywords: 'ruokatarjoukset, alennus, wolt, foodora, resq club, kotipizza, k-ruoka, fiksuruoka, helsinki, suomi',
   openGraph: {
-    title: 'FoodAi - Akıllı Yemek Platformu',
-    description: 'Yapay zeka destekli yemek fırsatlarını keşfet ve tasarruf et',
+    title: 'FoodAi - Älykkäät ruokatarjoukset',
+    description: 'AI-pohjainen ruokatarjousten vertailupalvelu Suomessa',
     type: 'website',
-    locale: 'tr_TR',
+    locale: 'fi_FI',
   },
   alternates: {
     languages: {
-      'tr': '/tr',
+      'fi': '/fi',
       'en': '/en',
     },
   },
