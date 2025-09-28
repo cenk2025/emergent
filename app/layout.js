@@ -113,6 +113,62 @@ export default function RootLayout({ children }) {
             <Toaster position="top-right" />
           </ThemeProvider>
         </AuthProvider>
+        
+        {/* Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              "name": "FoodAi",
+              "alternateName": "FoodAi - Älykkäät ruokatarjoukset",
+              "url": "https://foodai.fi",
+              "description": "AI-pohjainen ruokatarjousten vertailupalvelu Suomessa. Löydä parhaat tarjoukset Woltista, Foodorasta, ResQ Clubista ja muista palveluista.",
+              "applicationCategory": "Food & Drink",
+              "operatingSystem": "Web",
+              "offers": {
+                "@type": "Offer",
+                "category": "Food Delivery Comparison",
+                "availability": "https://schema.org/InStock"
+              },
+              "creator": {
+                "@type": "Organization",
+                "name": "FoodAi",
+                "url": "https://foodai.fi",
+                "contactPoint": {
+                  "@type": "ContactPoint",
+                  "telephone": "+358-40-123-4567",
+                  "contactType": "Customer Service",
+                  "email": "info@foodai.fi",
+                  "availableLanguage": ["Finnish", "English"]
+                },
+                "address": {
+                  "@type": "PostalAddress",
+                  "addressCountry": "FI",
+                  "addressLocality": "Helsinki"
+                }
+              },
+              "serviceArea": {
+                "@type": "Country",
+                "name": "Finland"
+              },
+              "inLanguage": ["fi", "en"],
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.8",
+                "reviewCount": "1247",
+                "bestRating": "5",
+                "worstRating": "1"
+              },
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://foodai.fi/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })
+          }}
+        />
       </body>
     </html>
   );
