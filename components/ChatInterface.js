@@ -327,7 +327,7 @@ export default function ChatInterface({
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder={t.placeholder}
-                  className="flex-1 border-gray-300 focus:border-purple-500 focus:ring-purple-500"
+                  className="flex-1 border-gray-300 focus:border-[#FFB000] focus:ring-[#FFB000]"
                   disabled={isLoading}
                 />
                 <Button
