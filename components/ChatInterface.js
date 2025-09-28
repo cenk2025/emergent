@@ -333,8 +333,8 @@ export default function ChatInterface({
                 <Button
                   onClick={() => handleSendMessage()}
                   disabled={isLoading || !input.trim()}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 
-                           hover:to-blue-700 text-white px-4"
+                  className="bg-gradient-to-r from-[#FFB000] to-[#FF6B35] hover:from-[#E09900] 
+                           hover:to-[#E55A2B] text-white px-4"
                 >
                   {isLoading ? (
                     <Loader2 className="h-4 w-4 animate-spin" />
