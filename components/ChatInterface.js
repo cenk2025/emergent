@@ -88,7 +88,7 @@ export default function ChatInterface({
     }
   };
 
-  const t = texts[language] || texts.fi;
+  const t = texts[language] || texts.tr;
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
