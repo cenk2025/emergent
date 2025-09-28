@@ -208,7 +208,7 @@ async function seedSupabaseData() {
           name: 'Wolt',
           logo_url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=100&h=100&fit=crop',
           color: '#00C2E8',
-          website: 'https://wolt.com',
+          website: 'https://wolt.com/fi',
           commission_rate: 8.50,
           is_active: true
         },
@@ -217,17 +217,44 @@ async function seedSupabaseData() {
           name: 'Foodora',
           logo_url: 'https://images.unsplash.com/photo-1555992336-03a23a47b61e?w=100&h=100&fit=crop',
           color: '#E91E63',
-          website: 'https://foodora.fi',
+          website: 'https://www.foodora.fi',
           commission_rate: 7.20,
           is_active: true
         },
         {
-          id: 'resq',
+          id: 'resq_club',
           name: 'ResQ Club',
           logo_url: 'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=100&h=100&fit=crop',
           color: '#4CAF50',
-          website: 'https://resq-club.com',
+          website: 'https://www.resq-club.com/fi/',
           commission_rate: 12.00,
+          is_active: true
+        },
+        {
+          id: 'kotipizza',
+          name: 'Kotipizza',
+          logo_url: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=100&h=100&fit=crop',
+          color: '#D32F2F',
+          website: 'https://www.kotipizza.fi/',
+          commission_rate: 6.50,
+          is_active: true
+        },
+        {
+          id: 'k_ruoka',
+          name: 'K-Ruoka',
+          logo_url: 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=100&h=100&fit=crop',
+          color: '#FF6D00',
+          website: 'https://www.k-ruoka.fi/kauppa',
+          commission_rate: 5.00,
+          is_active: true
+        },
+        {
+          id: 'fiksuruoka',
+          name: 'Fiksuruoka',
+          logo_url: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=100&h=100&fit=crop',
+          color: '#2E7D32',
+          website: 'https://www.fiksuruoka.fi',
+          commission_rate: 9.00,
           is_active: true
         }
       ]);
