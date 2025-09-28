@@ -34,105 +34,57 @@ export default function FoodAi() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [language, setLanguage] = useState('tr'); // Turkish by default
+  const [language, setLanguage] = useState('fi'); // Finnish by default
   const [isChatOpen, setIsChatOpen] = useState(false);
   
   const { theme, setTheme } = useTheme();
   const { user, isAdmin, signOut } = useAuth();
 
-  // Language texts - Turkish focused
-  const t = {
-    tr: {
-      title: 'En İyi Yemek Fırsatlarını Keşfet',
-      subtitle: 'Wolt, Foodora ve ResQ Club\'tan fırsatları karşılaştır. Akıllı algoritma ile tasarruf et.',
-      offers: 'Fırsat',
-      avgDiscount: 'Ort. İndirim',
-      providers: 'Platform',
-      savings: 'Tasarruf',
-      filters: 'Filtreler',
-      clear: 'Temizle',
-      clearFilters: 'Filtreleri Temizle',
-      city: 'Şehir',
-      allCities: 'Tüm şehirler',
-      cuisine: 'Mutfak',
-      allCuisines: 'Tüm mutfaklar',
-      provider: 'Platform',
-      allProviders: 'Tüm platformlar',
-      minDiscount: 'Min. indirim',
-      maxPrice: 'Max. fiyat',
-      sort: 'Sırala',
-      search: 'Yemek ara...',
-      orderNow: 'Sipariş Ver',
-      discount: 'İndirime göre',
-      price: 'Fiyata göre',
-      rating: 'Puana göre',
-      newest: 'En yeniler',
-      loading: 'Fırsatlar yükleniyor...',
-      noResults: 'Fırsat bulunamadı',
-      tryDifferent: 'Farklı filtreler deneyin',
-      admin: 'Admin Paneli',
-      logout: 'Çıkış Yap',
-      login: 'Giriş Yap',
-      hero: {
-        badge: '🔥 Yeni Nesil Platform',
-        title: 'Akıllı Yemek Keşfet',
-        highlight: 'AI Destekli',
-        subtitle: 'Yapay zeka ile en iyi yemek fırsatlarını bul, karşılaştır ve tasarruf et!',
-        cta: 'Fırsatları Keşfet',
-        features: [
-          { icon: Zap, text: 'Anında Karşılaştırma' },
-          { icon: TrendingUp, text: '%70\'e Varan İndirim' },
-          { icon: Heart, text: 'Kişisel Öneriler' }
-        ]
-      }
-    },
-    en: {
-      title: 'Discover the Best Food Deals',
-      subtitle: 'Compare deals from Wolt, Foodora & ResQ Club. Save smart with AI algorithms.',
-      offers: 'Deals',
-      avgDiscount: 'Avg. Discount',
-      providers: 'Platforms',
-      savings: 'Savings',
-      filters: 'Filters',
-      clear: 'Clear',
-      clearFilters: 'Clear Filters',
-      city: 'City',
-      allCities: 'All cities',
-      cuisine: 'Cuisine',
-      allCuisines: 'All cuisines',
-      provider: 'Platform',
-      allProviders: 'All platforms',
-      minDiscount: 'Min. discount',
-      maxPrice: 'Max. price',
-      sort: 'Sort by',
-      search: 'Search food...',
-      orderNow: 'Order Now',
-      discount: 'By discount',
-      price: 'By price',
-      rating: 'By rating',
-      newest: 'Newest',
-      loading: 'Loading deals...',
-      noResults: 'No deals found',
-      tryDifferent: 'Try different filters',
-      admin: 'Admin Panel',
-      logout: 'Sign Out',
-      login: 'Sign In',
-      hero: {
-        badge: '🔥 Next-Gen Platform',
-        title: 'Smart Food Discovery',
-        highlight: 'AI-Powered',
-        subtitle: 'Find, compare and save with the best food deals using artificial intelligence!',
-        cta: 'Explore Deals',
-        features: [
-          { icon: Zap, text: 'Instant Comparison' },
-          { icon: TrendingUp, text: 'Up to 70% Off' },
-          { icon: Heart, text: 'Personal Recommendations' }
-        ]
-      }
+  // Finnish language texts
+  const texts = {
+    title: 'Löydä parhaat ruokatarjoukset Suomesta',
+    subtitle: 'Vertaile tarjouksia Woltista, Foodorasta, ResQ Clubista ja muista. Säästä älykkäästi AI:n avulla.',
+    offers: 'Tarjousta',
+    avgDiscount: 'Keskim. alennus',
+    providers: 'Palvelua',
+    savings: 'Säästöjä',
+    filters: 'Suodattimet',
+    clear: 'Tyhjennä',
+    clearFilters: 'Tyhjennä suodattimet',
+    city: 'Kaupunki',
+    allCities: 'Kaikki kaupungit',
+    cuisine: 'Keittiö',
+    allCuisines: 'Kaikki keittiöt',
+    provider: 'Palvelu',
+    allProviders: 'Kaikki palvelut',
+    minDiscount: 'Min. alennus',
+    maxPrice: 'Max. hinta',
+    sort: 'Järjestä',
+    search: 'Etsi ruokaa...',
+    orderNow: 'Tilaa nyt',
+    discount: 'Alennuksen mukaan',
+    price: 'Hinnan mukaan',
+    rating: 'Arvostelun mukaan',
+    newest: 'Uusimmat',
+    loading: 'Ladataan tarjouksia...',
+    noResults: 'Tarjouksia ei löytynyt',
+    tryDifferent: 'Kokeile eri suodattimia',
+    admin: 'Ylläpito',
+    logout: 'Kirjaudu ulos',
+    login: 'Kirjaudu sisään',
+    hero: {
+      badge: '🔥 Uusi sukupolvi',
+      title: 'Älykkäät ruokatarjoukset',
+      highlight: 'AI-pohjainen',
+      subtitle: 'Löydä, vertaile ja säästä parhailla ruokatarjouksilla tekoälyn avulla!',
+      cta: 'Tutustu tarjouksiin',
+      features: [
+        { icon: Zap, text: 'Välitön vertailu' },
+        { icon: TrendingUp, text: 'Jopa 70% alennus' },
+        { icon: Heart, text: 'Henkilökohtaiset suositukset' }
+      ]
     }
   };
-
-  const texts = t[language] || t.tr;
 
   // Fetch data functions
   const fetchOffers = async () => {
@@ -258,22 +210,14 @@ export default function FoodAi() {
               {/* Language Toggle */}
               <div className="flex items-center gap-2 bg-gray-100 rounded-full p-1">
                 <button
-                  onClick={() => setLanguage('tr')}
-                  className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-                    language === 'tr' 
-                      ? 'bg-white text-[#FFB000] shadow-sm' 
-                      : 'text-gray-600 hover:text-gray-800'
-                  }`}
+                  onClick={() => setLanguage('fi')}
+                  className="px-3 py-1 rounded-full text-sm font-medium transition-all bg-white text-[#FFB000] shadow-sm"
                 >
-                  TR
+                  FI
                 </button>
                 <button
                   onClick={() => setLanguage('en')}
-                  className={`px-3 py-1 rounded-full text-sm font-medium transition-all ${
-                    language === 'en' 
-                      ? 'bg-white text-[#FFB000] shadow-sm' 
-                      : 'text-gray-600 hover:text-gray-800'
-                  }`}
+                  className="px-3 py-1 rounded-full text-sm font-medium transition-all text-gray-600 hover:text-gray-800"
                 >
                   EN
                 </button>
@@ -398,7 +342,7 @@ export default function FoodAi() {
                 <Award className="h-6 w-6 text-white" />
               </div>
               <div className="text-3xl font-extrabold text-[#8B5CF6] mb-2">
-                {stats.totalSavings || 0} ₺
+                {stats.totalSavings || 0} €
               </div>
               <div className="text-sm font-medium text-gray-600">{texts.savings}</div>
             </div>
@@ -500,7 +444,7 @@ export default function FoodAi() {
 
                 {/* Price Filter */}
                 <div className="space-y-3">
-                  <label className="text-sm font-medium text-gray-700">{texts.maxPrice}: {maxPrice[0]} ₺</label>
+                  <label className="text-sm font-medium text-gray-700">{texts.maxPrice}: {maxPrice[0]} €</label>
                   <Slider
                     value={maxPrice}
                     onValueChange={setMaxPrice}
@@ -602,15 +546,15 @@ export default function FoodAi() {
                           <div className="space-y-1">
                             <div className="flex items-center gap-2">
                               <span className="text-lg font-bold fast-food-price">
-                                {offer.discounted_price.toFixed(2)} ₺
+                                {offer.discounted_price.toFixed(2)} €
                               </span>
                               <span className="text-sm text-gray-500 line-through">
-                                {offer.original_price.toFixed(2)} ₺
+                                {offer.original_price.toFixed(2)} €
                               </span>
                             </div>
                             <div className="flex items-center gap-2 text-xs text-gray-500">
                               <Clock className="h-3 w-3" />
-                              <span>25-35 dk</span>
+                              <span>25-35 min</span>
                             </div>
                           </div>
                         </div>
@@ -620,7 +564,7 @@ export default function FoodAi() {
                           onClick={() => handleClickout(offer)}
                         >
                           <ShoppingBag className="h-4 w-4 mr-2" />
-                          {texts.orderNow} {(offer.original_price - offer.discounted_price).toFixed(2)} ₺
+                          {texts.orderNow} {(offer.original_price - offer.discounted_price).toFixed(2)} €
                         </Button>
                       </div>
                     </div>
@@ -635,7 +579,7 @@ export default function FoodAi() {
                       onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                       disabled={currentPage === 1}
                     >
-                      Önceki
+                      Edellinen
                     </Button>
                     
                     <div className="flex gap-1">
@@ -660,7 +604,7 @@ export default function FoodAi() {
                       onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                       disabled={currentPage === totalPages}
                     >
-                      Sonraki
+                      Seuraava
                     </Button>
                   </div>
                 )}
