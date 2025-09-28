@@ -29,8 +29,27 @@ export default function ChatInterface({
 
   // Language texts
   const texts = {
+    tr: {
+      title: 'FoodAi Asistan',
+      subtitle: 'Akıllı yemek önerileri ve fırsatlar',
+      placeholder: 'Yemek fırsatları hakkında sor...',
+      send: 'Gönder',
+      thinking: 'Düşünüyor...',
+      welcome: '🤖 Merhaba! Size en iyi yemek fırsatlarını bulmakta yardımcı olacağım.',
+      welcomeSubtext: 'Pizza indirimleri, burger fırsatları veya vegan seçenekler hakkında sorabilirsiniz!',
+      suggestions: [
+        'Yakındaki pizza fırsatları',
+        'En iyi burger indirimleri', 
+        'Vegan restoran teklifleri',
+        'Bugünün özel menüleri'
+      ],
+      error: 'Üzgünüm, bir hata oluştu. Lütfen tekrar deneyin.',
+      minimize: 'Küçült',
+      maximize: 'Büyüt',
+      close: 'Kapat'
+    },
     fi: {
-      title: 'FoodAI Avustaja',
+      title: 'FoodAi Avustaja',
       subtitle: 'Kysy ruokatarjouksista ja ravintola-suosituksista',
       placeholder: 'Kysymyksesi ruokatarjouksista...',
       send: 'Lähetä',
