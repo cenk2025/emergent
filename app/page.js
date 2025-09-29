@@ -497,7 +497,7 @@ export default function FoodAi() {
                 <div className="space-y-3">
                   <label className="text-sm font-medium text-foreground">{texts.city}</label>
                   <Select value={selectedCity} onValueChange={setSelectedCity}>
-                    <SelectTrigger className="border-gray-300 focus:border-[#FFB000]">
+                    <SelectTrigger className="modern-input border-border">
                       <SelectValue placeholder={texts.allCities} />
                     </SelectTrigger>
                     <SelectContent>
@@ -513,7 +513,7 @@ export default function FoodAi() {
                 <div className="space-y-3">
                   <label className="text-sm font-medium text-gray-700">{texts.cuisine}</label>
                   <Select value={selectedCuisine} onValueChange={setSelectedCuisine}>
-                    <SelectTrigger className="border-gray-300 focus:border-[#FFB000]">
+                    <SelectTrigger className="modern-input border-border">
                       <SelectValue placeholder={texts.allCuisines} />
                     </SelectTrigger>
                     <SelectContent>
@@ -529,7 +529,7 @@ export default function FoodAi() {
                 <div className="space-y-3">
                   <label className="text-sm font-medium text-gray-700">{texts.provider}</label>
                   <Select value={selectedProvider} onValueChange={setSelectedProvider}>
-                    <SelectTrigger className="border-gray-300 focus:border-[#FFB000]">
+                    <SelectTrigger className="modern-input border-border">
                       <SelectValue placeholder={texts.allProviders} />
                     </SelectTrigger>
                     <SelectContent>
@@ -571,7 +571,7 @@ export default function FoodAi() {
                 <div className="space-y-3">
                   <label className="text-sm font-medium text-gray-700">{texts.sort}</label>
                   <Select value={sortBy} onValueChange={setSortBy}>
-                    <SelectTrigger className="border-gray-300 focus:border-[#FFB000]">
+                    <SelectTrigger className="modern-input border-border">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
