@@ -647,7 +647,7 @@ export default function FoodAi() {
                         
                         <div className="flex items-center gap-2">
                           <MapPin className="h-4 w-4 text-gray-400" />
-                          <span className="text-sm text-gray-600">{offer.restaurant_name}</span>
+                          <span className="text-sm text-muted-foreground">{offer.restaurant_name}</span>
                           <div className="flex items-center gap-1 ml-auto">
                             <Star className="h-4 w-4 text-yellow-400 fill-current" />
                             <span className="text-sm font-medium">{offer.rating || 4.5}</span>
