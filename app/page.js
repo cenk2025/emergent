@@ -612,7 +612,7 @@ export default function FoodAi() {
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
                   {offers.map((offer, index) => (
-                    <div key={offer.id} className="fast-food-card group hover:scale-105 transition-all duration-300" 
+                    <div key={offer.id} className="modern-card group hover:scale-105 transition-all duration-300" 
                          style={{ animationDelay: `${index * 0.1}s` }}>
                       <div className="relative overflow-hidden rounded-lg mb-4">
                         <img
