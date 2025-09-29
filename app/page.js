@@ -279,7 +279,7 @@ export default function FoodAi() {
               </span>
             </h1>
             
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto slide-up" style={{ animationDelay: '0.2s' }}>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto slide-up" style={{ animationDelay: '0.2s' }}>
               {texts.hero.subtitle}
             </p>
             
