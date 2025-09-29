@@ -672,7 +672,7 @@ export default function FoodAi() {
                         </div>
                         
                         <Button 
-                          className="w-full fast-food-button group-hover:scale-105 transition-transform" 
+                          className="w-full modern-button modern-button-primary group-hover:scale-105 transition-transform" 
                           onClick={() => handleClickout(offer)}
                         >
                           <ShoppingBag className="h-4 w-4 mr-2" />
