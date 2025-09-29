@@ -213,16 +213,16 @@ export default function FoodAi() {
             
             <div className="flex items-center gap-4">
               {/* Language Toggle */}
-              <div className="flex items-center gap-2 bg-gray-100 rounded-full p-1">
+              <div className="flex items-center gap-2 bg-muted rounded-full p-1">
                 <button
                   onClick={() => setLanguage('fi')}
-                  className="px-3 py-1 rounded-full text-sm font-medium transition-all bg-white text-[#FFB000] shadow-sm"
+                  className="px-3 py-1 rounded-full text-sm font-medium transition-all bg-background text-primary shadow-sm"
                 >
                   FI
                 </button>
                 <button
                   onClick={() => setLanguage('en')}
-                  className="px-3 py-1 rounded-full text-sm font-medium transition-all text-gray-600 hover:text-gray-800"
+                  className="px-3 py-1 rounded-full text-sm font-medium transition-all text-muted-foreground hover:text-foreground"
                 >
                   EN
                 </button>
