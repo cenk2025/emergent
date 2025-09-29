@@ -246,7 +246,7 @@ export default function FoodAi() {
                 </div>
               ) : (
                 <Link href="/login">
-                  <Button className="fast-food-button">
+                  <Button className="modern-button modern-button-primary">
                     <User className="h-4 w-4 mr-2" />
                     {texts.login}
                   </Button>
