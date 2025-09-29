@@ -603,7 +603,7 @@ export default function FoodAi() {
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">{texts.noResults}</h3>
                 <p className="text-gray-600 mb-6">{texts.tryDifferent}</p>
                 {hasActiveFilters && (
-                  <Button onClick={resetFilters} className="fast-food-button">
+                  <Button onClick={resetFilters} className="modern-button modern-button-primary">
                     {texts.clearFilters}
                   </Button>
                 )}
