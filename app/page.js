@@ -730,9 +730,9 @@ export default function FoodAi() {
       {!isChatOpen && (
         <Button
           onClick={() => setIsChatOpen(true)}
-          className="fixed bottom-6 right-6 z-40 h-16 w-16 rounded-full bg-gradient-to-r from-[#FFB000] to-[#FF6B35] 
-                     hover:from-[#E09900] hover:to-[#E55A2B] shadow-2xl border-4 border-white transition-all duration-300
-                     hover:scale-110 float-animation"
+          className="fixed bottom-6 right-6 z-40 h-16 w-16 rounded-full bg-primary hover:bg-primary-hover 
+                     shadow-2xl border-4 border-background transition-all duration-300 hover:scale-110 
+                     focus:outline-2 focus:outline-ring focus:outline-offset-2"
           size="lg"
         >
           <MessageCircle className="h-7 w-7 text-white" />
