@@ -324,7 +324,7 @@ export default function FoodAi() {
               {/* First set of logos */}
               <div className="flex items-center gap-8 min-w-max">
                 <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
-                  <div className="w-8 h-8 bg-[#00C2E8] rounded-lg flex items-center justify-center">
+                  <div className="partner-logo bg-[#00C2E8]">
                     <span className="text-white font-bold text-sm">W</span>
                   </div>
                   <span className="partner-name">Wolt</span>
@@ -369,7 +369,7 @@ export default function FoodAi() {
               {/* Duplicate set for seamless loop */}
               <div className="flex items-center gap-8 min-w-max">
                 <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
-                  <div className="w-8 h-8 bg-[#00C2E8] rounded-lg flex items-center justify-center">
+                  <div className="partner-logo bg-[#00C2E8]">
                     <span className="text-white font-bold text-sm">W</span>
                   </div>
                   <span className="partner-name">Wolt</span>
