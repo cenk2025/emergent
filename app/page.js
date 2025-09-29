@@ -416,17 +416,17 @@ export default function FoodAi() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-white border-b">
+      <section className="py-16 bg-background border-b border-border">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center fast-food-card hover:scale-105 transition-transform duration-300">
-              <div className="fast-food-icon mx-auto mb-4">
-                <ShoppingBag className="h-6 w-6 text-white" />
+            <div className="stats-card">
+              <div className="stats-icon">
+                <ShoppingBag className="h-6 w-6" />
               </div>
-              <div className="text-3xl font-extrabold text-[#FFB000] mb-2">
+              <div className="stats-number">
                 {stats.activeOffers || 0}
               </div>
-              <div className="text-sm font-medium text-gray-600">{texts.offers}</div>
+              <div className="stats-label">{texts.offers}</div>
             </div>
             
             <div className="text-center fast-food-card hover:scale-105 transition-transform duration-300">
