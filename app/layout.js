@@ -1,4 +1,4 @@
-import { Inter, Poppins } from 'next/font/google';
+import { Inter, DM_Serif_Display } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from '@/components/ui/sonner';
 import { AuthProvider } from '@/contexts/AuthContext';
