@@ -267,14 +267,14 @@ export default function FoodAi() {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            <Badge className="fast-food-badge mb-6 bounce-in">
+            <Badge className="modern-badge mb-6 slide-up">
               {texts.hero.badge}
             </Badge>
             
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-6 slide-up">
-              <span className="fast-food-heading">{texts.hero.title}</span>
+            <h1 className="text-5xl md:text-7xl font-serif font-normal mb-6 slide-up tracking-tight">
+              <span className="text-foreground">{texts.hero.title}</span>
               <br />
-              <span className="text-4xl md:text-6xl bg-gradient-to-r from-[#FFB000] to-[#FF6B35] bg-clip-text text-transparent">
+              <span className="text-4xl md:text-6xl text-primary">
                 {texts.hero.highlight}
               </span>
             </h1>
