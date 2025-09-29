@@ -309,13 +309,13 @@ export default function FoodAi() {
       </section>
 
       {/* Sliding Partners Section */}
-      <section className="partners-section border-b border-gray-100 py-6 overflow-hidden">
+      <section className="partners-section border-b border-border py-6 overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center mb-6">
-            <p className="text-sm text-gray-600 font-medium mb-2">
+            <p className="text-sm text-muted-foreground font-medium mb-2">
               Vertailemme tarjouksia parhaista palveluista
             </p>
-            <div className="w-16 h-0.5 bg-gradient-to-r from-[#FFB000] to-[#FF6B35] mx-auto"></div>
+            <div className="w-16 h-0.5 bg-primary mx-auto"></div>
           </div>
           
           {/* Sliding logos container */}
