@@ -297,7 +297,7 @@ export default function FoodAi() {
             
             <Button 
               size="lg"
-              className="fast-food-button text-lg px-8 py-4 slide-up"
+              className="modern-button modern-button-primary text-lg px-8 py-4 slide-up"
               style={{ animationDelay: '0.6s' }}
               onClick={() => document.getElementById('offers-section').scrollIntoView({ behavior: 'smooth' })}
             >
