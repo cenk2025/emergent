@@ -327,7 +327,7 @@ export default function FoodAi() {
                   <div className="w-8 h-8 bg-[#00C2E8] rounded-lg flex items-center justify-center">
                     <span className="text-white font-bold text-sm">W</span>
                   </div>
-                  <span className="font-semibold text-gray-800">Wolt</span>
+                  <span className="partner-name">Wolt</span>
                 </div>
                 
                 <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
@@ -372,7 +372,7 @@ export default function FoodAi() {
                   <div className="w-8 h-8 bg-[#00C2E8] rounded-lg flex items-center justify-center">
                     <span className="text-white font-bold text-sm">W</span>
                   </div>
-                  <span className="font-semibold text-gray-800">Wolt</span>
+                  <span className="partner-name">Wolt</span>
                 </div>
                 
                 <div className="partner-card flex items-center gap-3 px-4 py-3 rounded-xl">
