@@ -108,7 +108,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fi" suppressHydrationWarning>
-      <body className={`${inter.className} ${poppins.variable}`}>
+      <body className={`${inter.variable} ${dmSerif.variable} font-sans`}>
         <AuthProvider>
           <ThemeProvider
             attribute="class"
