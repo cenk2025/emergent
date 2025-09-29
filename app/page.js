@@ -429,34 +429,34 @@ export default function FoodAi() {
               <div className="stats-label">{texts.offers}</div>
             </div>
             
-            <div className="text-center fast-food-card hover:scale-105 transition-transform duration-300">
-              <div className="fast-food-icon mx-auto mb-4">
-                <Percent className="h-6 w-6 text-white" />
+            <div className="stats-card">
+              <div className="stats-icon">
+                <Percent className="h-6 w-6" />
               </div>
-              <div className="text-3xl font-extrabold text-[#FF6B35] mb-2">
+              <div className="stats-number">
                 {stats.avgDiscount || 0}%
               </div>
-              <div className="text-sm font-medium text-gray-600">{texts.avgDiscount}</div>
+              <div className="stats-label">{texts.avgDiscount}</div>
             </div>
             
-            <div className="text-center fast-food-card hover:scale-105 transition-transform duration-300">
-              <div className="fast-food-icon mx-auto mb-4">
-                <Truck className="h-6 w-6 text-white" />
+            <div className="stats-card">
+              <div className="stats-icon">
+                <Truck className="h-6 w-6" />
               </div>
-              <div className="text-3xl font-extrabold text-[#00D4AA] mb-2">
+              <div className="stats-number">
                 {stats.activeProviders || 0}
               </div>
-              <div className="text-sm font-medium text-gray-600">{texts.providers}</div>
+              <div className="stats-label">{texts.providers}</div>
             </div>
             
-            <div className="text-center fast-food-card hover:scale-105 transition-transform duration-300">
-              <div className="fast-food-icon mx-auto mb-4">
-                <Award className="h-6 w-6 text-white" />
+            <div className="stats-card">
+              <div className="stats-icon">
+                <Award className="h-6 w-6" />
               </div>
-              <div className="text-3xl font-extrabold text-[#8B5CF6] mb-2">
+              <div className="stats-number">
                 {stats.totalSavings || 0} €
               </div>
-              <div className="text-sm font-medium text-gray-600">{texts.savings}</div>
+              <div className="stats-label">{texts.savings}</div>
             </div>
           </div>
         </div>
