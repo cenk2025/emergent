@@ -637,11 +637,11 @@ export default function FoodAi() {
                       </div>
                       
                       <div className="space-y-3">
-                        <h3 className="font-bold text-lg text-gray-800 group-hover:text-[#FFB000] transition-colors">
+                        <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors">
                           {offer.title}
                         </h3>
                         
-                        <p className="text-sm text-gray-600 line-clamp-2">
+                        <p className="text-sm text-muted-foreground line-clamp-2">
                           {offer.description}
                         </p>
                         
