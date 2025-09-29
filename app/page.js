@@ -200,7 +200,7 @@ export default function FoodAi() {
     selectedProvider !== 'all' || minDiscount[0] > 10 || maxPrice[0] < 200 || searchQuery;
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--color-background)' }}>
+    <div className="min-h-screen bg-background text-foreground">
       {/* Modern Header */}
       <header className="sticky top-0 z-50 border-b border-gray-200/20 backdrop-blur-xl bg-white/80">
         <div className="container mx-auto px-4 py-4">
