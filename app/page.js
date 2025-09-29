@@ -703,7 +703,7 @@ export default function FoodAi() {
                             variant={currentPage === page ? "default" : "outline"}
                             size="sm"
                             onClick={() => setCurrentPage(page)}
-                            className={currentPage === page ? "fast-food-button" : ""}
+                            className={currentPage === page ? "modern-button modern-button-primary" : "modern-button modern-button-secondary"}
                           >
                             {page}
                           </Button>
