@@ -258,11 +258,11 @@ export default function FoodAi() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#FFB000]/10 via-[#FF6B35]/5 to-[#00D4AA]/10 py-20">
+      <section className="relative overflow-hidden hero-gradient py-20">
         <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-[#FFB000]/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-40 h-40 bg-[#FF6B35]/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 w-60 h-60 bg-[#00D4AA]/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+          <div className="absolute top-10 left-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-40 h-40 bg-accent/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 w-60 h-60 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-500"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
