@@ -5,11 +5,17 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import './globals.css';
 import './design-system.css';
 
-const inter = Inter({ subsets: ['latin'] });
-const poppins = Poppins({ 
+const inter = Inter({ 
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-poppins'
+  variable: '--font-sans',
+  display: 'swap'
+});
+
+const dmSerif = DM_Serif_Display({ 
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-serif',
+  display: 'swap'
 });
 
 export const metadata = {
