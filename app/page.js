@@ -495,7 +495,7 @@ export default function FoodAi() {
 
                 {/* City Filter */}
                 <div className="space-y-3">
-                  <label className="text-sm font-medium text-gray-700">{texts.city}</label>
+                  <label className="text-sm font-medium text-foreground">{texts.city}</label>
                   <Select value={selectedCity} onValueChange={setSelectedCity}>
                     <SelectTrigger className="border-gray-300 focus:border-[#FFB000]">
                       <SelectValue placeholder={texts.allCities} />
