@@ -480,15 +480,15 @@ export default function FoodAi() {
               <div className="space-y-6">
                 {/* Search */}
                 <div className="space-y-3">
-                  <label className="text-sm font-medium text-gray-700">{texts.search}</label>
+                  <label className="text-sm font-medium text-foreground">{texts.search}</label>
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       type="text"
                       placeholder={texts.search}
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 border-gray-300 focus:border-[#FFB000] focus:ring-[#FFB000]"
+                      className="modern-input pl-10"
                     />
                   </div>
                 </div>
