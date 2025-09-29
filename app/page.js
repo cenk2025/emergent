@@ -467,11 +467,11 @@ export default function FoodAi() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Filters Sidebar */}
           <div className="lg:w-80 space-y-6">
-            <div className="fast-food-card sticky top-24">
+            <div className="modern-card sticky top-24">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-bold text-gray-800">{texts.filters}</h3>
+                <h3 className="text-xl font-semibold text-foreground">{texts.filters}</h3>
                 {hasActiveFilters && (
-                  <Button variant="outline" onClick={resetFilters} size="sm">
+                  <Button variant="outline" onClick={resetFilters} size="sm" className="modern-button modern-button-secondary">
                     {texts.clear}
                   </Button>
                 )}
