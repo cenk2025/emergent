@@ -202,11 +202,11 @@ export default function FoodAi() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Modern Header */}
-      <header className="sticky top-0 z-50 border-b border-gray-200/20 backdrop-blur-xl bg-white/80">
+      <header className="sticky top-0 z-50 border-b border-border backdrop-blur-xl bg-background/80">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <h1 className="text-3xl font-extrabold fast-food-heading">
+              <h1 className="text-3xl font-serif font-normal tracking-tight text-foreground">
                 FoodAi
               </h1>
             </div>
