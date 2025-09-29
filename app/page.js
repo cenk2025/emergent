@@ -657,10 +657,10 @@ export default function FoodAi() {
                         <div className="flex items-center justify-between">
                           <div className="space-y-1">
                             <div className="flex items-center gap-2">
-                              <span className="text-lg font-bold fast-food-price">
+                              <span className="text-lg font-bold text-primary">
                                 {offer.discounted_price.toFixed(2)} €
                               </span>
-                              <span className="text-sm text-gray-500 line-through">
+                              <span className="text-sm text-muted-foreground line-through">
                                 {offer.original_price.toFixed(2)} €
                               </span>
                             </div>
