@@ -233,13 +233,13 @@ export default function FoodAi() {
                 <div className="flex items-center gap-3">
                   {isAdmin && (
                     <Link href="/admin">
-                      <Button variant="outline" size="sm" className="fast-food-button">
+                      <Button variant="outline" size="sm" className="modern-button modern-button-secondary">
                         <Settings className="h-4 w-4 mr-2" />
                         {texts.admin}
                       </Button>
                     </Link>
                   )}
-                  <Button onClick={signOut} variant="outline" size="sm">
+                  <Button onClick={signOut} variant="outline" size="sm" className="modern-button modern-button-secondary">
                     <LogOut className="h-4 w-4 mr-2" />
                     {texts.logout}
                   </Button>
