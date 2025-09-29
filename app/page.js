@@ -287,9 +287,9 @@ export default function FoodAi() {
               {texts.hero.features.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
-                  <div key={index} className="flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md">
-                    <Icon className="h-5 w-5 text-[#FFB000]" />
-                    <span className="font-medium text-gray-800">{feature.text}</span>
+                  <div key={index} className="flex items-center gap-2 bg-background/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md border border-border">
+                    <Icon className="h-5 w-5 text-primary" />
+                    <span className="font-medium text-foreground">{feature.text}</span>
                   </div>
                 );
               })}
